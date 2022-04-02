@@ -19,3 +19,5 @@
 /app/config/server/local.neon
 /app/config/google_service_account.json
 /.env
+.data
+.docker

@@ -1,11 +1,15 @@
 {block #content}
 	<header>
-		<div class="container">
-			<div class="header-text">
-				<h1>Lucie Svěcená</h1>
-				<p>Účastnice LOH 2016</p>
-			</div>
-		</div>
+        <div class="header-text container-fluid">
+            <span>Ukáži Vám, jak si zamilovat</span>
+            <h1 class="loading wave">Plavání</h1>
+        </div>
+        <a href="#lekce" class="scroll-down scroll">
+          Nabídka lekcí
+          <svg id="svg-arrow-down" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 22 35" style="enable-background:new 0 0 22 35;" xml:space="preserve">
+            <polygon class="arrow" points="20.58,11.584 12.004,20.158 12.004,0 9.996,0 9.996,20.158 1.42,11.584 0,13.004 11,24 22,13.004 "></polygon>
+          </svg>
+        </a>
 	</header>
 
 	<section class="lectures" id="lekce">
@@ -34,9 +38,31 @@
 	</section>
 
 	<section class="news" id="aktuality">
-		<div class="container">
-			<h2>Aktuality</h2>
-
+		<div class="container-fluid">
+			<div class="container">
+				<h2>Aktuality</h2>
+				{if (!empty($news))}
+					<div class="articles-row">
+					{foreach $news as $new}
+						<div class="new article">
+							<a n:href="New:show $new->slug">
+								<img n:ifset="$new->cover" src="{$basePath}/upload/news/{$new->id}/{$new->cover}" class="img-fluid" alt="{$new->title}">
+								<h3>{$new->title}</h3>
+							</a>
+							<time datetime="{$new->created|date:"Y-m-d"}">{$new->created|dayMonth}</time>
+							{if $new->perex}
+							   {$new->perex|noescape|truncate:300}
+							{elseif $new->content}
+							   {$new->content|noescape|truncate:300}
+							{/if}
+						</div>
+					{/foreach}
+					</div>
+					<a n:href="New:default" class="btn btn-primary mt-4">Archiv novinek</a>
+				{else}
+					<div class="alert alert-danger">Aktuálně nejsou k dispozici žádné novinky.</div>
+				{/if}
+			</div>
 		</div>
 	</section>
 
@@ -53,7 +79,73 @@
 	</section>
 
 	<section class="contact" id="kontakt">
-		<h2>Kontakt</h2>
+		<div class="container">
+			<h2>Kontaktní informace</h2>
 
+			<div class="contact-grid">
+				<div class="contact-form">
+					<h3>Kontaktní formulář</h3>
+
+					{snippet flashes}
+						{foreach $flashes as $flash}
+							<div class="alert alert-{$flash->type} alert-dismissible fade show" style="max-width: 500px" role="alert">
+								{$flash->message}
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+						{/foreach}
+					{/snippet}
+
+					{form contactForm, class => 'row'}
+						<div class="col-lg-6">
+							<div class="form-group">
+								{label name}{/label}
+								{input name class => 'form-control'}
+							</div>
+						</div>
+
+						<div class="col-lg-6">
+							<div class="form-group">
+								{label email}{/label}
+								{input email class => 'form-control'}
+							</div>
+						</div>
+
+						<div class="col-lg-12">
+							<div class="form-group">
+								{label message}{/label}
+								{input message class => 'form-control', rows => 5}
+							</div>
+						</div>
+
+						<div class="col-lg-12">
+							<div class="form-group">
+								<div n:name="recaptcha"></div>
+							</div>
+						</div>
+
+						<div class="col-lg-6">
+							<div class="form-group">
+								{input submit class => 'btn btn-success ajax'}
+							</div>
+						</div>
+					{/form}
+				</div>
+
+				<ul class="contact-list">
+					<li n:if="$vars->phone"><a href="tel:{$vars->phone}"><i class="fa-solid fa-phone"></i> {$vars->phone}</a></li>
+					<li><a n:if="$vars->email" href="mailto:{$vars->email}"><i class="fa-solid fa-at"></i> {$vars->email}</a></li>
+					<li><a n:if="$vars->instagram" href="mailto:{$vars->instagram}"><i class="fa-solid fa-at"></i> {$vars->instagram}</a></li>
+					<li><a n:if="$vars->facebook" href="mailto:{$vars->facebook}"><i class="fa-solid fa-at"></i> {$vars->facebook}</a></li>
+
+				</ul>
+			</div>
+		</div>
 	</section>
+{/block}
+
+{block #scripts}
+	<script src="https://www.google.com/recaptcha/api.js?render=explicit"></script>
+	<script src="{$basePath}/scripts/invisibleRecaptcha.js"></script>
 {/block}

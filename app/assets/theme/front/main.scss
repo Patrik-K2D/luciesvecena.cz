@@ -3,6 +3,7 @@
 	font-family: 'Raleway';
 	font-style: normal;
 	font-weight: 400;
+	font-display: swap;
 	src: url('../../fonts/raleway-v26-latin-ext_latin-regular.eot'); /* IE9 Compat Modes */
 	src: local(''),
 	url('../../fonts/raleway-v26-latin-ext_latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
@@ -16,6 +17,7 @@
 	font-family: 'Raleway';
 	font-style: normal;
 	font-weight: 700;
+	font-display: swap;
 	src: url('../../fonts/raleway-v26-latin-ext_latin-700.eot'); /* IE9 Compat Modes */
 	src: local(''),
 	url('../../fonts/raleway-v26-latin-ext_latin-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
@@ -30,6 +32,7 @@
 	font-family: 'Inter';
 	font-style: normal;
 	font-weight: 400;
+	font-display: swap;
 	src: url('../../fonts/inter-v8-latin-ext_latin-regular.eot'); /* IE9 Compat Modes */
 	src: local(''),
 	url('../../fonts/inter-v8-latin-ext_latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
@@ -43,6 +46,7 @@
 	font-family: 'Inter';
 	font-style: normal;
 	font-weight: 700;
+	font-display: swap;
 	src: url('../../fonts/inter-v8-latin-ext_latin-700.eot'); /* IE9 Compat Modes */
 	src: local(''),
 	url('../../fonts/inter-v8-latin-ext_latin-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
@@ -89,14 +93,13 @@ h3 {
 
 
 .navbar {
-	background: $white;
 	transition: all .25s ease-in-out;
 
 	.nav-link {
-		font-weight: 700;
-		font-size: 1.1rem;
-		color: $gray-700;
-		border-radius: $btn-border-radius;
+		font-size: 1.3rem;
+		margin-bottom: 1.5rem;
+		text-transform: uppercase;
+		text-align: center;
 	}
 
 	.navbar-brand {
@@ -104,7 +107,7 @@ h3 {
 		svg {
 			height: 50px;
 			transition: all .25s ease-in-out;
-			fill: $primary;
+			fill: $white;
 		}
 	}
 
@@ -117,10 +120,10 @@ h3 {
 		flex-direction: column;
 		width: 50px;
 		cursor: pointer;
-		margin: 0;
+		margin: .5rem;
 
 		span{
-			background: $primary;
+			background: $white;
 			border-radius: calc(0.1px * 66.66);
 			height: calc(0.07px * 66.66);
 			margin: calc(0.07px * 66.66) 0;
@@ -163,11 +166,16 @@ h3 {
 
 }
 
+.navbar-bg {
+	background: $primary;
+}
+
+
 // HEADER
 header {
 	height: 100vh;
 	position: relative;
-	background: url("../../img/header.jpg") center right 30% no-repeat;
+	background: url("../../img/cover.jpg") center no-repeat;
 	background-size: cover;
 	z-index: 0;
 
@@ -181,18 +189,24 @@ header {
 	}
 
 	.header-text {
+		display: block;
 		position: absolute;
-		top: 60vh;
+		bottom: 20%;
 		z-index: 100000;
 		color: $white;
 
-		h1 {
-			font-size: 4rem;
+		span {
+			display: block;
+			text-align: center;
+			margin: 0;
+			font-size: 1.3rem;
+			text-transform: uppercase;
+			font-weight: 700;
 		}
 
-		p {
-			font-size: 1.5rem;
-			text-transform: uppercase;
+		h1 {
+			text-align: center;
+			font-size: 4.5rem;
 		}
 	}
 }
@@ -326,5 +340,84 @@ footer.main-footer {
 	i {
 		color: $brown;
 		font-size: 1.5rem;
+	}
+}
+
+// header animation
+.loading {
+	font-weight: 700;
+	letter-spacing: .2rem;
+	text-transform: uppercase;
+}
+.wave {
+	background-image: url("https://webdevtrick.com/wp-content/uploads/water-wave.png");
+	-webkit-background-clip: text;
+	color: transparent;
+	text-shadow: 0 0 rgba($white, .2);
+	animation: wave-animation 1s infinite linear, loading-animation 5s infinite linear alternate;
+	background-size: 200px 100px;
+	background-repeat: repeat-x;
+	opacity: 1;
+}
+
+@keyframes wave-animation {
+	0% {
+		background-position: 0 bottom;
+	}
+	100% {
+		background-position: 200px bottom;
+	}
+}
+@keyframes loading-animation {
+	0% {
+		background-size: 200px 0;
+	}
+	100% {
+		background-size: 200px 240px;
+	}
+}
+@media (max-width: 765px) {
+	.loading {
+		font-size: 50pt;
+	}
+}
+
+// scroll down
+.scroll-down {
+	z-index: 10000000;
+	color: $gray-200;
+	position: absolute;
+	width: 100vw;
+	text-align: center;
+	display: block;
+	bottom: 3%;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-size: .8rem;
+	transition: all .2s ease-in-out;
+
+	&:hover, &:focus {
+		color: $white;
+		text-decoration: none;
+	}
+
+	svg {
+		width: 20px;
+		display: block;
+		margin: 5px auto;
+
+		.arrow {
+			fill: $gray-200;
+			animation: anim 1s ease-in alternate infinite;
+
+			@keyframes anim {
+				0% {
+					transform: translateY(0);
+				}
+				100% {
+					transform: translateY(10px);
+				}
+			}
+		}
 	}
 }
