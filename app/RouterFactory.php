@@ -18,7 +18,11 @@ class RouterFactory
 			->addRoute('admin/<presenter>/<action>[/<id>]', 'Homepage:default');
 
 		$router->withModule('Front')
-			->addRoute('[<lang=cs (cs)>/]<presenter>/<action>', 'Homepage:default');
+
+            ->addRoute('[<lang=cs (cs)>/]', 'Homepage:default')
+            ->addRoute('[<lang=cs (cs)>/]aktuality', 'New:default')
+            ->addRoute('[<lang=cs (cs)>/]aktualita/<slug>', 'New:show')
+            ->addRoute('[<lang=cs (cs)>/]<presenter>/<action>', 'Error:404');
 
 		return $router;
 	}

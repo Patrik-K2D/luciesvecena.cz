@@ -16,7 +16,7 @@ class NewPresenter extends BasePresenter
 
     public function renderDefault(): void
     {
-        $this->template->news = $this->newModel->getPublicNews('cs')->limit(3);
+        $this->template->news = $this->newModel->getPublicNews('cs');
     }
 
     public function renderShow(string $slug): void

@@ -1,0 +1,32 @@
+{block #content}
+<div class="subpage-header"></div>
+
+<section class="new-page page">
+    <div class="container">
+
+        <article class="detail">
+            {if $new !== NULL}
+                <time datetime="{$new->created|date:"Y-m-d"}">{$new->created|dayMonth}</time>
+                <img n:ifset="$article->cover" src="{$basePath}/upload/news/{$article->id}/{$article->cover}" class="img-fluid" alt="{$article->title}">
+                <h2 n:block="title" class="mb-2">{$new->title}</h2>
+
+                <div class="new-content">
+                    {$new->content|noescape}
+                </div>
+
+                <h4 class="mt-5" n:if="!empty($images)">Galerie</h4>
+                <div n:if="!empty($images)" class="row">
+                    {foreach $images as $image}
+                        <a href="{$basePath}/upload/galleries/{$new->gallery_id}/{$image->name}" class="col-sm-6 col-md-4 col-lg-3" data-lightbox="gallery" data-name="{$image->name}">
+                            <img src="{$basePath}/upload/galleries/{$new->gallery_id}/thumbs/{$image->name}" class="lazyload img-thumbnail m-1" alt="{$image->title}">
+                        </a>
+                    {/foreach}
+                </div>
+                <a n:href="Homepage:" class="btn btn-primary mt-4">Zpět na úvod</a>
+            {else}
+                <h2>Aktualitu se nepodařilo nalézt.</h2>
+                <a n:href="Homepage:" class="btn btn-primary mt-4">Zpět na úvod</a>
+            {/if}
+        </article>
+    </div>
+</section>

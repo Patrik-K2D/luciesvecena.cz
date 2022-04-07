@@ -76,12 +76,25 @@ section {
 	padding: 4rem 0;
 }
 
+.section-heading {
+	span {
+		display: block;
+		text-align: center;
+		opacity: .4;
+		font-size: 1.2rem;
+		text-transform: uppercase;
+		font-weight: 700;
+		font-family: 'Raleway', sans-serif;
+		padding: .3rem;
+	}
+}
+
 h1 {
 	font-size: 4rem;
 }
 
 h2 {
-	font-size: 2rem;
+	font-size: 3rem;
 	font-weight: 700;
 	text-align: center;
 	margin-bottom: 2rem;
@@ -91,6 +104,15 @@ h3 {
 	font-size: 1.4rem;
 }
 
+.btn {
+	text-transform: uppercase;
+	font-weight: 700;
+	font-size: .9rem;
+}
+
+.btn-lg {
+	font-weight: 700;
+}
 
 .navbar {
 	transition: all .25s ease-in-out;
@@ -100,6 +122,12 @@ h3 {
 		margin-bottom: 1.5rem;
 		text-transform: uppercase;
 		text-align: center;
+	}
+
+	.nav-icon {
+		i {
+			font-size: 1.5rem;
+		}
 	}
 
 	.navbar-brand {
@@ -168,8 +196,49 @@ h3 {
 
 .navbar-bg {
 	background: $primary;
+
+	.navbar-brand {
+		svg {
+			height: 40px;
+		}
+	}
 }
 
+.navbar-collapse {
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	padding: 100px;
+	top: 0;
+	left: -100vw;
+	transition: all .2s ease-in;
+	z-index: -1;
+	background: rgba(darken($primary, 15%), .9);
+}
+
+.navbar-collapse.show {
+	left: 0;
+}
+
+.subpage-header {
+	position: relative;
+	display: block;
+	background: $primary;
+	width: 100vw;
+	height: 350px;
+
+	&:before {
+		content: '';
+		position: absolute;
+		z-index: 0;
+		top: 0;
+		opacity: 0.2;
+		width: 100vw;
+		height: 100%;
+		background: url("../../img/pool.jpg") 100% 100%;
+		background-size: cover;
+	}
+}
 
 // HEADER
 header {
@@ -206,7 +275,7 @@ header {
 
 		h1 {
 			text-align: center;
-			font-size: 4.5rem;
+			font-size: 4rem;
 		}
 	}
 }
@@ -215,38 +284,150 @@ header {
 .about {
 	.about-flex {
 		display: flex;
-		flex-direction: column;
+		flex-direction: column-reverse;
 		gap: 3rem;
 
 		img {
 			max-width: 100%;
-			width: 400px;
+			max-height: 500px;
+			object-fit: cover;
+		}
+
+		.about-text {
+			font-size: 1.1rem;
+		}
+	}
+
+	.achievements {
+		display: grid;
+		padding: 4rem 0;
+		grid-template-columns: 1fr;
+		grid-gap: 3.5rem;
+		margin-top: 4rem;
+		background: rgba($secondary, .25);
+
+		.achievement {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			font-size: 3rem;
+			gap: .3rem;
+			font-weight: 700;
+			border-radius: 1rem;
+
+			span {
+				font-weight: 400;
+				font-size: 1rem;
+				text-transform: uppercase;
+				text-align: center;
+			}
 		}
 	}
 }
 
 // LEKCE
 .lectures {
-	background: linear-gradient($secondary 50%, $white 50%);
-	padding-left: 2rem;
-	padding-right: 2rem;
+	background: $gray-100;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	overflow: hidden;
+
 
 	.lecture {
+		border-radius: 3rem 0 3rem 0;
 		padding: 1.5rem;
-		background-color: $primary;
+		background: linear-gradient(to bottom right, $primary, lighten($primary, 10%));
 		color: $white;
 		display: grid;
 		grid-template-columns: 1fr;
+		font-size: 1.1rem;
 		grid-gap: 2rem;
+
+		img {
+			border-radius: 3rem 0 3rem 0;
+		}
+
+		a {
+			color: $white;
+		}
+
+		.text {
+			text-align: center;
+		}
+	}
+}
+
+// AKTUALITY
+.news {
+
+	.articles-row {
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-gap: 3rem;
+	}
+
+	.new {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+		background: $white;
+		padding: 1rem;
+		max-width: 1000px;
+		align-items: flex-start;
+
+		.text {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			justify-content: flex-start;
+		}
+
+		img {
+			width: 100%;
+			max-height: 300px;
+			object-fit: cover;
+		}
+
+		time {
+			text-transform: lowercase;
+			background: rgba($secondary, .5);
+			padding: .5rem;
+			margin-bottom: 1rem;
+		}
+	}
+
+	.alert {
+		text-align: center;
+		background: $gray-200;
+		padding: 1.5rem;
+	}
+}
+
+article {
+	max-width: 800px;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 2rem;
+
+	time {
+		text-transform: lowercase;
+		background: rgba($secondary, .5);
+		padding: 1rem;
 	}
 }
 
 // PARTNERS
 .partners {
+
 	.partners-grid {
 		display: grid;
 		grid-template-columns: 1fr;
-		grid-gap: 2rem;
+		grid-gap: 4rem;
 
 		a {
 			display: flex;
@@ -254,10 +435,63 @@ header {
 			align-items: center;
 		}
 		img {
-			max-width: 100%;
+			max-width: 80%;
+			opacity: .8;
+			transition: .2s ease-in-out;
+
+			&:hover {
+				opacity: 1;
+			}
 		}
 		.under-armor {max-width: 60%;}
-		.ohana {max-width: 80%;}
+		.ohana {max-width: 70%;}
+	}
+}
+
+// KONTAKT
+.contact {
+	.contact-grid {
+		z-index: 1;
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-gap: 3rem;
+		align-items: start;
+
+		.contact-form {
+			grid-row-start: 2;
+			background-color: $primary;
+			padding: 1.5rem;
+			color: $white;
+			text-align: center;
+		}
+
+		.contact-list {
+			z-index: 1;
+			background-color: $white;
+			padding: 1.5rem;
+			list-style-type: none;
+
+			li {
+				margin-bottom: 1rem;
+			}
+
+			a {
+				overflow-wrap: anywhere;
+				display: flex;
+				justify-content: flex-start;
+				align-items: center;
+				font-size: 1.2rem;
+
+				&:hover {
+					text-decoration: none;
+				}
+
+				i {
+					font-size: 1.5rem;
+					margin-right: 1rem;
+				}
+			}
+		}
 	}
 }
 
@@ -291,7 +525,6 @@ header {
 
 // FOOTER
 footer.main-footer {
-	margin-top: 2rem;
 	background: $gray-100;
 
 	.author {
@@ -348,15 +581,26 @@ footer.main-footer {
 	font-weight: 700;
 	letter-spacing: .2rem;
 	text-transform: uppercase;
+
+	&:before {
+		content: "Plavání";
+		position: absolute;
+		font-weight: 700;
+		color: $white;
+		text-transform: uppercase;
+		font-size: 4rem;
+		z-index: -10;
+	}
 }
 .wave {
-	background-image: url("https://webdevtrick.com/wp-content/uploads/water-wave.png");
+	//background-image: url("https://webdevtrick.com/wp-content/uploads/water-wave.png");
+	background-image: url("../../img/wave3.png");
+	border-image: unset;
+	background-repeat: repeat-x;
 	-webkit-background-clip: text;
 	color: transparent;
-	text-shadow: 0 0 rgba($white, .2);
 	animation: wave-animation 1s infinite linear, loading-animation 5s infinite linear alternate;
 	background-size: 200px 100px;
-	background-repeat: repeat-x;
 	opacity: 1;
 }
 

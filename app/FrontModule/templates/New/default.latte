@@ -1,0 +1,33 @@
+{block #content}
+<div class="subpage-header"></div>
+
+<section class="news">
+    <div class="container-fluid">
+        <div class="container">
+            <h1 n:block="title">Archiv aktualit</h1>
+            {if (!empty($news))}
+                <div class="articles-row mt-5">
+                    {foreach $news as $new}
+                        <div class="new">
+                            <img n:ifset="$article->cover" src="{$basePath}/upload/news/{$article->id}/{$article->cover}" class="img-fluid" alt="{$article->title}">
+                            <div class="text">
+                                <time datetime="{$new->created|date:"Y-m-d"}">{$new->created|dayMonth}</time>
+                                <a n:href="New:show $new->slug">
+
+                                    <h3>{$new->title}</h3>
+                                </a>
+                                {if $new->perex}
+                                    {$new->perex|noescape|truncate:300}
+                                {elseif $new->content}
+                                    {$new->content|noescape|truncate:300}
+                                {/if}
+                            </div>
+                        </div>
+                    {/foreach}
+                </div>
+            {else}
+                <div class="alert alert-default">Aktuálně nejsou k dispozici žádné aktuality.</div>
+            {/if}
+        </div>
+    </div>
+</section>

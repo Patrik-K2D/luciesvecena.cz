@@ -4,7 +4,7 @@
 	<nav id="navbar" class="navbar navbar-expand-lg fixed-top navbar-dark">
 		<div class="container">
 			<a class="navbar-brand" n:href="Homepage:">
-				<svg width="auto" height="auto" viewBox="0 0 250 100" xmlns="http://www.w3.org/2000/svg">
+				<svg viewBox="0 0 250 100" xmlns="http://www.w3.org/2000/svg">
 					<path d="M4.17783 45.5196V1.24711H8.54273V41.6536H34.1086V45.5196H4.17783Z"/>
 					<path d="M39.2251 32.1132V13.0323H43.4653V31.3649C43.4653 35.0647 44.0889 37.8291 45.336 39.6582C46.6247 41.4873 48.5161 42.4019 51.0104 42.4019C52.6732 42.4019 54.2736 42.0485 55.8117 41.3418C57.3914 40.5935 58.784 39.5543 59.9896 38.224C61.1951 36.8522 62.1097 35.2725 62.7332 33.485V13.0323H66.9734V40.4065C66.9734 40.9885 67.0981 41.425 67.3475 41.716C67.597 41.9654 67.9711 42.1109 68.47 42.1524V45.5196C67.9711 45.5612 67.5762 45.582 67.2852 45.582C66.9942 45.6236 66.724 45.6444 66.4746 45.6444C65.6432 45.5612 64.9157 45.2287 64.2921 44.6467C63.7101 44.0647 63.3984 43.358 63.3568 42.5266L63.2321 38.1617C61.8187 40.6559 59.8857 42.6097 57.433 44.0231C55.0219 45.4365 52.403 46.1432 49.5762 46.1432C46.1674 46.1432 43.59 44.9584 41.8441 42.5889C40.0981 40.2194 39.2251 36.7275 39.2251 32.1132Z"/>
 					<path d="M90.653 46.1432C88.2835 46.1432 86.101 45.7067 84.1056 44.8337C82.1518 43.9192 80.4266 42.6721 78.9301 41.0924C77.4751 39.5127 76.332 37.7044 75.5005 35.6674C74.7107 33.6305 74.3158 31.4688 74.3158 29.1825C74.3158 26.1062 75.0017 23.3002 76.3735 20.7644C77.7454 18.2286 79.6576 16.2125 82.1103 14.7159C84.5629 13.2194 87.3897 12.4711 90.5906 12.4711C93.6253 12.4711 96.3066 13.1778 98.6345 14.5912C100.962 15.9631 102.688 17.8337 103.81 20.2032L99.6946 21.5127C98.78 19.8499 97.4913 18.5612 95.8285 17.6467C94.2073 16.6905 92.3989 16.2125 90.4036 16.2125C88.2419 16.2125 86.2673 16.7737 84.4798 17.8961C82.6922 19.0185 81.2581 20.5566 80.1772 22.5104C79.138 24.4642 78.6183 26.6882 78.6183 29.1825C78.6183 31.6351 79.1588 33.8591 80.2396 35.8545C81.3204 37.8499 82.7546 39.4504 84.5421 40.6559C86.3297 41.8199 88.3042 42.4019 90.4659 42.4019C91.8793 42.4019 93.2303 42.1524 94.519 41.6536C95.8493 41.1547 96.9925 40.4896 97.9486 39.6582C98.9463 38.7852 99.6114 37.8499 99.944 36.8522L104.122 38.0993C103.54 39.6374 102.563 41.03 101.191 42.2772C99.8608 43.4827 98.2812 44.4388 96.4521 45.1455C94.6645 45.8106 92.7315 46.1432 90.653 46.1432Z"/>
@@ -26,9 +26,9 @@
 				<span></span>
 			</label>
 			<div class="collapse navbar-collapse" id="navbarToggler">
-				<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+				<ul class="navbar-nav ml-auto mt-4 mt-lg-0">
 					<li class="nav-item">
-						<a n:class="$presenter->isLinkCurrent('Homepage:default') ? 'scroll nav-link' : nav-link" n:href="Homepage:">Úvod</a>
+						<a n:class="$presenter->isLinkCurrent('Homepage:default') ? 'scroll nav-link' : nav-link" n:href="Homepage:#uvod">Úvod</a>
 					</li>
 					<li class="nav-item">
 						<a n:class="$presenter->isLinkCurrent('Homepage:default') ? 'scroll nav-link' : nav-link" n:href="Homepage:#lekce">Lekce</a>
@@ -40,7 +40,16 @@
 						<a n:class="$presenter->isLinkCurrent('Homepage:default') ? 'scroll nav-link' : nav-link" n:href="Homepage:#aktuality">Aktuality</a>
 					</li>
 					<li class="nav-item">
-						<a n:class="$presenter->isLinkCurrent('Homepage:default') ? 'scroll nav-link' : nav-link" n:href="Homepage:#contact">Kontakt</a>
+						<a n:class="$presenter->isLinkCurrent('Homepage:default') ? 'scroll nav-link' : nav-link" n:href="Homepage:#kontakt">Kontakt</a>
+					</li>
+					<li class="nav-item">
+						<a n:class="$presenter->isLinkCurrent('Homepage:default') ? 'scroll nav-link' : nav-link" n:href="Homepage:#partneri">Partneři</a>
+					</li>
+					<li n:if="$vars->instagram" class="nav-icon">
+						<a class="nav-link" href="mailto:{$vars->instagram}"><i class="fa-brands fa-instagram"></i></a>
+					</li>
+					<li n:if="$vars->facebook" class="nav-icon">
+						<a class="nav-link" href="mailto:{$vars->facebook}"><i class="fa-brands fa-facebook"></i></a>
 					</li>
 				</ul>
 			</div>

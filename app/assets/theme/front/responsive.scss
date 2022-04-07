@@ -1,12 +1,49 @@
 @include media-breakpoint-up(sm) {
+	// LEKCE
+	.lectures {
+		padding-left: 4rem;
+		padding-right: 4rem;
 
+		.lecture {
+			padding: 3rem;
+		}
+	}
+
+	.about {
+
+		.about-flex {
+			.about-text {
+				font-size: 1.2rem;
+			}
+		}
+
+		.achievements {
+			align-items: start;
+			grid-template-columns: 1fr 1fr;
+			padding: 4rem 2rem;
+		}
+	}
+
+	.partners {
+		.partners-grid {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
 }
 
 @include media-breakpoint-up(md) {
-
+	.news {
+		.articles-row {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
 }
 
 @include media-breakpoint-up(lg) {
+
+	section {
+		padding: 8rem 0;
+	}
 
 	.navbar {
 		.navbar-brand {
@@ -30,6 +67,27 @@
 		}
 	}
 
+	.navbar-collapse {
+		position: relative;
+		width: auto;
+		height: auto;
+		padding: unset;
+		top: auto;
+		left: auto;
+		z-index: -1;
+		background: unset;
+	}
+
+	.navbar-bg {
+		padding: 0 1rem;
+
+		.navbar-brand {
+			svg {
+				height: 50px;
+			}
+		}
+	}
+
 	header {
 		.header-text {
 			bottom: 15%;
@@ -41,6 +99,134 @@
 
 			h1 {
 				font-size: 7.5rem;
+			}
+		}
+	}
+
+	// header animation
+	.loading {
+		&:before {
+			font-size: 7.5rem;
+		}
+	}
+
+
+	// LEKCE
+	.lectures {
+		padding-left: 2rem;
+		padding-right: 2rem;
+
+		.lecture {
+			padding: 2.5rem;
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			grid-gap: 4rem;
+			font-size: 1.3rem;
+
+			img {
+				height: 100%;
+				object-fit: cover;
+				object-position: right;
+			}
+
+			.text {
+				text-align: left;
+			}
+		}
+	}
+
+	// ABOUT
+	.about {
+		background: rgba($secondary, .25);
+
+		.about-flex {
+			flex-direction: row;
+			align-items: center;
+			gap: 6rem;
+
+			.section-heading {
+				span {
+					text-align: left;
+				}
+			}
+			h2 {
+				text-align: left;
+			}
+
+			.about-text {
+				text-align: left;
+				font-size: 1.3rem;
+			}
+		}
+
+		.achievements {
+			padding: 3rem 1.5rem;
+			gap: 2.5rem;
+			grid-template-columns: 1fr 1fr 1fr 1fr;
+		}
+	}
+
+	// PARTNERS
+	.partners {
+		padding-bottom: 0;
+
+		.partners-grid {
+			padding: 6rem 3rem;
+			background: rgb(220,238,252);
+			grid-template-columns: 1fr 1fr 1fr 1fr;
+
+			img {
+				max-width: 100%;
+			}
+			.under-armor {max-width: 60%;}
+			.ohana {max-width: 80%;}
+		}
+	}
+
+	// KONTAKT
+	.contact {
+		overflow: hidden;
+		position: relative;
+		background: lighten($secondary, 20%);
+
+		&:before {
+			content: '';
+			position: absolute;
+			z-index: 0;
+			top: 0;
+			opacity: 0.1;
+			width: 100vw;
+			height: 100%;
+			background: url("../../img/pool.jpg") 100% 100%;
+			background-size: cover;
+		}
+
+		.contact-grid {
+			grid-template-columns: 1fr 1fr;
+			grid-gap: 4rem;
+
+			.contact-form {
+				grid-row-start: 1;
+				padding: 3rem;
+				text-align: left;
+
+				input {
+					max-width: 500px;
+				}
+			}
+
+			.contact-list {
+				padding: 3rem;
+
+				li {
+					margin-bottom: 2rem;
+					font-size: 1.2rem;
+				}
+
+				i {
+					font-size: 3rem;
+					margin-right: .75rem;
+				}
 			}
 		}
 	}

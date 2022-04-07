@@ -1,7 +1,8 @@
 {block #content}
-	<header>
+	<header id="uvod">
         <div class="header-text container-fluid">
-            <span>Ukáži Vám, jak si zamilovat</span>
+{*			Ukáži Vám, jak si zamilovat*}
+            <span>Objevte krásy</span>
             <h1 class="loading wave">Plavání</h1>
         </div>
         <a href="#lekce" class="scroll-down scroll">
@@ -13,12 +14,15 @@
 	</header>
 
 	<section class="lectures" id="lekce">
-		<h2>Služby</h2>
-		<div class="lecture">
+		<div class="section-heading">
+			<span>Služby</span>
+			<h2>Individuální lekce plavání</h2>
+		</div>
+		<div class="lecture container">
 			<img class="img-fluid" src="{$basePath}/dist/img/lectures.jpg" alt="Lekce plavání">
-			<h3>Individuální lekce plavání</h3>
 			<div class="text">
 				{box service}
+				<a href="#kontakt" class="btn btn-success btn-lg scroll mt-3">Objednat lekci!</a>
 			</div>
 		</div>
 	</section>
@@ -27,64 +31,82 @@
 		<div class="container about-flex">
 			<img src="{$basePath}/dist/img/about.jpg" alt="Lucie Svěcená">
 			<div class="about-text">
-				<h2>O mně</h2>
+				<div class="section-heading">
+					<span>O mně</span>
+					<h2>Ahoj!<br>Já jsem Lucka.</h2>
+				</div>
 				{box about}
+			</div>
+		</div>
+		<div class="container achievements">
+			<div class="achievement">
+				73
+				<span>Titulů mistryně ČR</span>
+			</div>
+			<div class="achievement">
+				🥈🥈🥈🥈
+				<span>Medaile z mistrovství Evropy</span>
+			</div>
+			<div class="achievement">
+				🥉
+				<span>Medaile z mistrovství světa</span>
+			</div>
+			<div class="achievement">
+				0:58.54
+				<span>Český rekord na 100M<br>(50m bazén)</span>
 			</div>
 		</div>
 	</section>
 
-	<section class="gallery" id="galerie">
-		<h2>Galerie</h2>
-	</section>
+{*	<section class="gallery" id="galerie">*}
+{*		<h2>Galerie</h2>*}
+{*	</section>*}
 
 	<section class="news" id="aktuality">
 		<div class="container-fluid">
 			<div class="container">
-				<h2>Aktuality</h2>
+				<div class="section-heading">
+					<span>Aktuality</span>
+					<h2>Nejnovější informace</h2>
+				</div>
 				{if (!empty($news))}
 					<div class="articles-row">
 					{foreach $news as $new}
 						<div class="new article">
-							<a n:href="New:show $new->slug">
-								<img n:ifset="$new->cover" src="{$basePath}/upload/news/{$new->id}/{$new->cover}" class="img-fluid" alt="{$new->title}">
-								<h3>{$new->title}</h3>
-							</a>
-							<time datetime="{$new->created|date:"Y-m-d"}">{$new->created|dayMonth}</time>
-							{if $new->perex}
-							   {$new->perex|noescape|truncate:300}
-							{elseif $new->content}
-							   {$new->content|noescape|truncate:300}
-							{/if}
+							<img n:ifset="$article->cover" src="{$basePath}/upload/news/{$article->id}/{$article->cover}" class="img-fluid" alt="{$article->title}">
+							<div class="text">
+								<time datetime="{$new->created|date:"Y-m-d"}">{$new->created|dayMonth}</time>
+								<a n:href="New:show $new->slug">
+									<h3>{$new->title}</h3>
+								</a>
+								{if $new->perex}
+								   {$new->perex|noescape|truncate:300}
+								{elseif $new->content}
+								   {$new->content|noescape|truncate:300}
+								{/if}
+							</div>
 						</div>
 					{/foreach}
 					</div>
-					<a n:href="New:default" class="btn btn-primary mt-4">Archiv novinek</a>
+					<div class="container text-center">
+						<a n:href="New:default" class="btn btn-primary mt-5">Archiv aktualit</a>
+					</div>
 				{else}
-					<div class="alert alert-danger">Aktuálně nejsou k dispozici žádné novinky.</div>
+					<div class="alert alert-default">Aktuálně nejsou k dispozici žádné aktuality.</div>
 				{/if}
 			</div>
 		</div>
 	</section>
 
-	<section class="partners" id="partneri">
-	<div class="container">
-		<h2>Partneři</h2>
-		<div class="partners-grid">
-			<a href="https://www.nutrend.cz/"><img src="{$basePath}/dist/img/partners/nutrend.png" alt="Nutrend"></a>
-			<a href="https://2xu.shop/"><img src="{$basePath}/dist/img/partners/logo2xu.png" alt="2XU"></a>
-			<a href="https://www.underarmour.cz/"><img class="under-armor" src="{$basePath}/dist/img/partners/under_armor.png" alt="Under Armor"></a>
-			<a href="#"><img class="ohana" src="{$basePath}/dist/img/partners/ohana.png" alt="Ohana"></a>
-		</div>
-	</div>
-	</section>
-
 	<section class="contact" id="kontakt">
 		<div class="container">
-			<h2>Kontaktní informace</h2>
-
+			<div class="section-heading">
+				<span>Kontaktní informace</span>
+				<h2>Ozvěte se mi!</h2>
+			</div>
 			<div class="contact-grid">
 				<div class="contact-form">
-					<h3>Kontaktní formulář</h3>
+					<h3 class="mb-4">Kontaktní formulář</h3>
 
 					{snippet flashes}
 						{foreach $flashes as $flash}
@@ -98,14 +120,14 @@
 					{/snippet}
 
 					{form contactForm, class => 'row'}
-						<div class="col-lg-6">
+						<div class="col-lg-12">
 							<div class="form-group">
 								{label name}{/label}
 								{input name class => 'form-control'}
 							</div>
 						</div>
 
-						<div class="col-lg-6">
+						<div class="col-lg-12">
 							<div class="form-group">
 								{label email}{/label}
 								{input email class => 'form-control'}
@@ -127,7 +149,7 @@
 
 						<div class="col-lg-6">
 							<div class="form-group">
-								{input submit class => 'btn btn-success ajax'}
+								{input submit class => 'btn btn-success btn-lg ajax'}
 							</div>
 						</div>
 					{/form}
@@ -136,11 +158,26 @@
 				<ul class="contact-list">
 					<li n:if="$vars->phone"><a href="tel:{$vars->phone}"><i class="fa-solid fa-phone"></i> {$vars->phone}</a></li>
 					<li><a n:if="$vars->email" href="mailto:{$vars->email}"><i class="fa-solid fa-at"></i> {$vars->email}</a></li>
-					<li><a n:if="$vars->instagram" href="mailto:{$vars->instagram}"><i class="fa-solid fa-at"></i> {$vars->instagram}</a></li>
-					<li><a n:if="$vars->facebook" href="mailto:{$vars->facebook}"><i class="fa-solid fa-at"></i> {$vars->facebook}</a></li>
+					<h5 class="pt-3 my-3">Jsem na Instagramu i Facebooku!</h5>
+					<li><a n:if="$vars->instagram" href="mailto:{$vars->instagram}"><i class="fa-brands fa-instagram"></i> {$vars->instagram}</a></li>
+					<li><a n:if="$vars->facebook" href="mailto:{$vars->facebook}"><i class="fa-brands fa-facebook"></i> {$vars->facebook}</a></li>
 
 				</ul>
 			</div>
+		</div>
+	</section>
+
+
+	<section class="partners" id="partneri">
+		<div class="section-heading">
+			<span>Partneři</span>
+			<h2>Kdo mě podporuje</h2>
+		</div>
+		<div class="partners-grid">
+			<a href="https://www.nutrend.cz/"><img src="{$basePath}/dist/img/partners/nutrend.png" alt="Nutrend"></a>
+			<a href="https://2xu.shop/"><img src="{$basePath}/dist/img/partners/logo2xu.png" alt="2XU"></a>
+			<a href="https://www.underarmour.cz/"><img class="under-armor" src="{$basePath}/dist/img/partners/under_armor.png" alt="Under Armor"></a>
+			<a href="#"><img class="ohana" src="{$basePath}/dist/img/partners/ohana.png" alt="Ohana"></a>
 		</div>
 	</section>
 {/block}

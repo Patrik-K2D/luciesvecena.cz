@@ -21,7 +21,7 @@ class HomepagePresenter extends BasePresenter
 
 	public function renderDefault(): void
 	{
-        $this->template->news = $this->newModel->getPublicNews('cs')->limit(3);
+        $this->template->news = $this->newModel->getPublicNews('cs')->limit(2);
         $this->template->gallery = $this->galleryModel->getGallery(1);
 	}
 
