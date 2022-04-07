@@ -69,7 +69,7 @@
 					<span>Aktuality</span>
 					<h2>Nejnovější informace</h2>
 				</div>
-				{if (!empty($news))}
+				{if count($news) > 0}
 					<div class="articles-row">
 					{foreach $news as $new}
 						<div class="new article">
@@ -159,8 +159,8 @@
 					<li n:if="$vars->phone"><a href="tel:{$vars->phone}"><i class="fa-solid fa-phone"></i> {$vars->phone}</a></li>
 					<li><a n:if="$vars->email" href="mailto:{$vars->email}"><i class="fa-solid fa-at"></i> {$vars->email}</a></li>
 					<h5 class="pt-3 my-3">Jsem na Instagramu i Facebooku!</h5>
-					<li><a n:if="$vars->instagram" href="mailto:{$vars->instagram}"><i class="fa-brands fa-instagram"></i> {$vars->instagram}</a></li>
-					<li><a n:if="$vars->facebook" href="mailto:{$vars->facebook}"><i class="fa-brands fa-facebook"></i> {$vars->facebook}</a></li>
+					<li><a n:if="$vars->instagram" href="{$vars->instagram}"><i class="fa-brands fa-instagram"></i> {$vars->instagram}</a></li>
+					<li><a n:if="$vars->facebook" href="{$vars->facebook}"><i class="fa-brands fa-facebook"></i> {$vars->facebook}</a></li>
 
 				</ul>
 			</div>

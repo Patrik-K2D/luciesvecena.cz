@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <div class="container">
             <h1 n:block="title">Archiv aktualit</h1>
-            {if (!empty($news))}
+            {if count($news) > 0}
                 <div class="articles-row mt-5">
                     {foreach $news as $new}
                         <div class="new">
