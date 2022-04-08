@@ -113,6 +113,9 @@ class HomepagePresenter extends BasePresenter
             ->addRule(Form::MAX_LENGTH, 'Maximální délka je %s znaků', 150)
             ->setRequired('Musíte zadat Váš email.');
 
+        $form->addInvisibleReCaptcha('recaptcha')
+            ->setMessage('Jste opravdu člověk?');
+
         $form->addSubmit('submit', 'Odeslat objednávku');
 
         $form->onSubmit[] = function (Form $form) {
