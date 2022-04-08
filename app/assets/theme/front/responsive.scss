@@ -41,8 +41,12 @@
 
 @include media-breakpoint-up(lg) {
 
-	section:not(.new-page, .news-page) {
+	section {
 		padding: 8rem 0;
+	}
+
+	.new-page, .news-page {
+		padding: 4rem 0;
 	}
 
 	.navbar {
