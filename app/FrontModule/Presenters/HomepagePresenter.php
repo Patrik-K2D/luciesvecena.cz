@@ -2,6 +2,7 @@
 
 namespace App\FrontModule\Presenters;
 
+use Contributte\PdfResponse\PdfResponse;
 use K2D\Gallery\Models\GalleryModel;
 use K2D\News\Models\NewModel;
 use Nette\Application\UI\Form;
@@ -10,6 +11,7 @@ use Nette\Mail\SendmailMailer;
 use Nette\Mail\SmtpException;
 use Nette\Mail\SmtpMailer;
 use Nette\Neon\Neon;
+use Nette\Utils\Strings;
 
 class HomepagePresenter extends BasePresenter
 {
@@ -26,6 +28,10 @@ class HomepagePresenter extends BasePresenter
         $this->template->gallery = $this->galleryModel->getGallery(1);
 	}
 
+    public function renderTemplate(): void
+    {
+
+    }
 
     public function createComponentContactForm(): Form
     {
@@ -106,7 +112,7 @@ class HomepagePresenter extends BasePresenter
         $form->addInteger('lessons', 'Počet lekcí')
             ->setDefaultValue(1)
             ->addRule(Form::MIN, 'Minimálně %s lekce', 1)
-            ->addRule(Form::MAX, 'Maximálně %s lekcí', 20)
+            ->addRule(Form::MAX, 'Maximálně %s lekcí', 10)
             ->setRequired('Musíte zadat počet lekcí.');
 
         $form->addEmail('email', 'Email')
@@ -124,7 +130,23 @@ class HomepagePresenter extends BasePresenter
 
                 $variableSymbol = substr((string)strtotime("now"),0,5) . rand(100, 999);
                 $validity = date('d. m. Y', strtotime("+6 months"));
+                $pdfName = Strings::webalize($values['name']) . $variableSymbol;
 
+                // create pdf
+                $template = $this->createTemplate();
+                $template->setFile(__DIR__ . "/../../Voucher/template.latte");
+                $template->name = $values['name'];
+                $template->lessons = $values['lessons'];
+                $template->variableSymbol = $variableSymbol;
+                $template->validity = $validity;
+
+                // save pdf
+                $pdf = new PdfResponse($template);
+                $pdf->documentTitle = $pdfName;
+                $pdf->pageFormat = "A5-L"; // wide format
+                $pdf->save(__DIR__ . "../../../www/voucher/");
+
+                // send mail
                 $mail = new Message();
 
                 $vars = $this->configuration->getAllVars();
