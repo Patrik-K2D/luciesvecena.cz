@@ -157,6 +157,10 @@
 				text-align: left;
 				font-size: 1.3rem;
 			}
+
+			img {
+				border-radius: 0 3rem 0 3rem;
+			}
 		}
 
 		.achievements {
@@ -166,20 +170,22 @@
 		}
 	}
 
-	// PARTNERS
-	.partners {
-		padding-bottom: 0;
+	// VOUCHER
+	.voucher {
+		.voucher-text {
+			font-size: 1.2rem;
+		}
 
-		.partners-grid {
-			padding: 6rem 3rem;
-			background: rgb(220,238,252);
-			grid-template-columns: 1fr 1fr 1fr 1fr;
+		.voucher-grid {
+			grid-template-columns: 1fr 1fr;
+			grid-gap: 6rem;
 
-			img {
-				max-width: 100%;
+			.voucher-form {
+				border-radius: 3rem 0 3rem 0;
+				font-size: 1.2rem;
+				padding: 3rem;
+				text-align: left;
 			}
-			.under-armor {max-width: 60%;}
-			.ohana {max-width: 80%;}
 		}
 	}
 
@@ -206,8 +212,8 @@
 			grid-gap: 4rem;
 
 			.contact-form {
-				grid-row-start: 1;
 				padding: 3rem;
+				font-size: 1.2rem;
 				text-align: left;
 
 				input {
@@ -217,9 +223,10 @@
 
 			.contact-list {
 				padding: 3rem;
+				border-radius: 0 3rem 0 3rem;
 
 				li {
-					margin-bottom: 2rem;
+					margin-bottom: 1rem;
 					font-size: 1.2rem;
 				}
 
@@ -228,6 +235,23 @@
 					margin-right: .75rem;
 				}
 			}
+		}
+	}
+
+	// PARTNERS
+	.partners {
+		padding-bottom: 0;
+
+		.partners-grid {
+			padding: 6rem 3rem;
+			background: rgb(220,238,252);
+			grid-template-columns: 1fr 1fr 1fr 1fr;
+
+			img {
+				max-width: 100%;
+			}
+			.under-armor {max-width: 60%;}
+			.ohana {max-width: 80%;}
 		}
 	}
 }

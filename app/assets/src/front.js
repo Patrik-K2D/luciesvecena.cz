@@ -2,6 +2,10 @@ import "@theme/front/init.scss";
 
 import "bootstrap/js/dist/dropdown";
 import "bootstrap/js/dist/collapse";
+import "bootstrap/js/dist/modal";
+
+import "nette.ajax.js/nette.ajax";
+import naja from "naja";
 
 // import "@/front/cookie";
 
@@ -34,6 +38,8 @@ function runOnScroll() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+	naja.initialize();
+
 	// close navbar on link click
 	links.forEach((link) => {
 		link.addEventListener("click", () => {

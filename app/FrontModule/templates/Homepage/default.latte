@@ -58,10 +58,6 @@
 		</div>
 	</section>
 
-{*	<section class="gallery" id="galerie">*}
-{*		<h2>Galerie</h2>*}
-{*	</section>*}
-
 	<section class="news" id="aktuality">
 		<div class="container-fluid">
 			<div class="container">
@@ -98,6 +94,72 @@
 		</div>
 	</section>
 
+	<section class="voucher" id="darkovy-poukaz">
+		<div class="voucher-text">
+			<div class="section-heading">
+				<span>Překvapte své blízké</span>
+				<h2>Dárkový poukaz</h2>
+			</div>
+			{box voucher}
+		</div>
+		<div class="container voucher-grid">
+			<div class="voucher-preview">
+				<img src="{$basePath}/dist/img/voucher/voucher_preview.jpg" alt="Dárkový poukaz">
+				<small>Náhled dárkového poukazu</small>
+			</div>
+			<div class="voucher-form">
+				<h3 class="mb-4">Objednat dárkový poukaz</h3>
+
+				{snippet voucherFlashes}
+					{foreach $flashes as $flash}
+						<div class="alert alert-{$flash->type} alert-dismissible fade show" style="max-width: 500px" role="alert">
+							{$flash->message}
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+					{/foreach}
+				{/snippet}
+				{snippet voucherForm}
+					{form voucherForm, class => 'row'}
+						<div class="col-lg-12">
+							<div class="form-group">
+								{label name}{/label}
+								{input name class => 'form-control'}
+								<small>Zadejte jméno a příjmení vlastníka poukazu.</small>
+							</div>
+						</div>
+
+						<div class="col-lg-12">
+							<div class="form-group">
+								{label lessons}{/label}
+								{input lessons class => 'form-control'}
+								<small>Cena 600Kč/lekce. Maximální počet lekcí = 20</small>
+							</div>
+						</div>
+
+						<div class="col-lg-12">
+							<div class="form-group">
+								{label email}{/label}
+								{input email class => 'form-control'}
+								<small>Na tuto adresu Vám bude zaslán poukaz i informace k platbě.</small>
+							</div>
+						</div>
+
+						<div class="col-lg-6">
+							<div class="form-group d-inline-flex align-items-center">
+								<div class="spinner-border spinner-voucher mr-3" style="display: none;" role="status">
+									<span class="sr-only">Loading...</span>
+								</div>
+								{input submit class => 'btn btn-success btn-lg ajax submit-voucherForm'}
+							</div>
+						</div>
+					{/form}
+				{/snippet}
+			</div>
+		</div>
+	</section>
+
 	<section class="contact" id="kontakt">
 		<div class="container">
 			<div class="section-heading">
@@ -105,10 +167,18 @@
 				<h2>Ozvěte se mi!</h2>
 			</div>
 			<div class="contact-grid">
+				<ul class="contact-list">
+					<li n:if="$vars->phone"><a href="tel:{$vars->phone}"><i class="fa-solid fa-phone"></i> {$vars->phone}</a></li>
+					<li><a n:if="$vars->email" href="mailto:{$vars->email}"><i class="fa-solid fa-at"></i> {$vars->email}</a></li>
+					<h5 class="pt-3 my-3">Jsem na Instagramu i Facebooku!</h5>
+					<li><a n:if="$vars->instagram" href="{$vars->instagram}"><i class="fa-brands fa-instagram"></i> {$vars->instagram}</a></li>
+					<li><a n:if="$vars->facebook" href="{$vars->facebook}"><i class="fa-brands fa-facebook"></i> {$vars->facebook}</a></li>
+				</ul>
+
 				<div class="contact-form">
 					<h3 class="mb-4">Kontaktní formulář</h3>
 
-					{snippet flashes}
+					{snippet contactFlashes}
 						{foreach $flashes as $flash}
 							<div class="alert alert-{$flash->type} alert-dismissible fade show" style="max-width: 500px" role="alert">
 								{$flash->message}
@@ -119,50 +189,40 @@
 						{/foreach}
 					{/snippet}
 
-					{form contactForm, class => 'row'}
-						<div class="col-lg-12">
-							<div class="form-group">
-								{label name}{/label}
-								{input name class => 'form-control'}
+					{snippet contactForm}
+						{form contactForm, class => 'row'}
+							<div class="col-lg-12">
+								<div class="form-group">
+									{label name}{/label}
+									{input name class => 'form-control'}
+								</div>
 							</div>
-						</div>
 
-						<div class="col-lg-12">
-							<div class="form-group">
-								{label email}{/label}
-								{input email class => 'form-control'}
+							<div class="col-lg-12">
+								<div class="form-group">
+									{label email}{/label}
+									{input email class => 'form-control'}
+								</div>
 							</div>
-						</div>
 
-						<div class="col-lg-12">
-							<div class="form-group">
-								{label message}{/label}
-								{input message class => 'form-control', rows => 5}
+							<div class="col-lg-12">
+								<div class="form-group">
+									{label message}{/label}
+									{input message class => 'form-control', rows => 5}
+								</div>
 							</div>
-						</div>
 
-						<div class="col-lg-12">
-							<div class="form-group">
-								<div n:name="recaptcha"></div>
+							<div class="col-lg-6">
+								<div class="form-group d-inline-flex align-items-center">
+									<div class="spinner-border spinner-contact mr-3" style="display: none;" role="status">
+										<span class="sr-only">Loading...</span>
+									</div>
+									{input submit class => 'btn btn-success btn-lg ajax submit-contactForm'}
+								</div>
 							</div>
-						</div>
-
-						<div class="col-lg-6">
-							<div class="form-group">
-								{input submit class => 'btn btn-success btn-lg ajax'}
-							</div>
-						</div>
-					{/form}
+						{/form}
+					{/snippet}
 				</div>
-
-				<ul class="contact-list">
-					<li n:if="$vars->phone"><a href="tel:{$vars->phone}"><i class="fa-solid fa-phone"></i> {$vars->phone}</a></li>
-					<li><a n:if="$vars->email" href="mailto:{$vars->email}"><i class="fa-solid fa-at"></i> {$vars->email}</a></li>
-					<h5 class="pt-3 my-3">Jsem na Instagramu i Facebooku!</h5>
-					<li><a n:if="$vars->instagram" href="{$vars->instagram}"><i class="fa-brands fa-instagram"></i> {$vars->instagram}</a></li>
-					<li><a n:if="$vars->facebook" href="{$vars->facebook}"><i class="fa-brands fa-facebook"></i> {$vars->facebook}</a></li>
-
-				</ul>
 			</div>
 		</div>
 	</section>
@@ -185,4 +245,39 @@
 {block #scripts}
 	<script src="https://www.google.com/recaptcha/api.js?render=explicit"></script>
 	<script src="{$basePath}/scripts/invisibleRecaptcha.js"></script>
+	<script type="application/javascript">
+		function onClick(e) {
+			e.preventDefault();
+			grecaptcha.ready(function() {
+				grecaptcha.execute('reCAPTCHA_site_key', { action: 'submit'}).then(function(token) {
+					// Add your logic to submit to your backend server here.
+				});
+			});
+		}
+
+		var voucherForm = document.querySelector('#frm-voucherForm');
+		var contactForm = document.querySelector('#frm-contactForm');
+		var submitVoucher = voucherForm.querySelector('.submit-voucherForm');
+		var submitContact = contactForm.querySelector('.submit-contactForm');
+		var spinnerVoucher = voucherForm.querySelector('.spinner-voucher');
+		var spinnerContact = contactForm.querySelector('.spinner-contact');
+
+		submitVoucher.addEventListener('click', () => {
+			submitVoucher.disabled = true;
+			spinnerVoucher.style.display = 'block';
+			setTimeout(() => {
+				submitVoucher.disabled = false;
+				spinnerVoucher.style.display = 'none';
+			}, 3000);
+		});
+
+		submitContact.addEventListener('click', () => {
+			submitContact.disabled = true;
+			spinnerContact.style.display = 'block';
+			setTimeout(() => {
+				submitContact.disabled = false;
+				spinnerContact.style.display = 'none';
+			}, 3000);
+		});
+	</script>
 {/block}

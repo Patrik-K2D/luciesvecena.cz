@@ -421,6 +421,56 @@ article {
 	}
 }
 
+
+// VOUCHER
+.voucher {
+	.voucher-text {
+		margin: 0 auto;
+		padding-bottom: 4rem;
+		font-size: 1.1rem;
+		text-align: center;
+		max-width: 600px;
+	}
+
+	.voucher-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-gap: 4rem;
+
+		.voucher-form {
+			background-color: $white;
+			padding: 1.5rem;
+			color: $primary;
+			text-align: center;
+
+			h3 {
+				font-weight: 700;
+			}
+
+			label {
+				font-weight: 500;
+			}
+
+			small {
+				color: $gray-700;
+			}
+
+			input[name=lessons] {
+				max-width: 300px;
+			}
+
+			input[name=name] {
+				max-width: 450px;
+			}
+		}
+
+		img {
+			max-width: 100%;
+		}
+	}
+}
+
+
 // PARTNERS
 .partners {
 
@@ -458,11 +508,18 @@ article {
 		align-items: start;
 
 		.contact-form {
-			grid-row-start: 2;
 			background-color: $primary;
 			padding: 1.5rem;
 			color: $white;
 			text-align: center;
+
+			h3 {
+				font-weight: 700;
+			}
+
+			label {
+				font-weight: 500;
+			}
 		}
 
 		.contact-list {
@@ -574,6 +631,10 @@ footer.main-footer {
 		color: $brown;
 		font-size: 1.5rem;
 	}
+}
+
+.grecaptcha-badge {
+	z-index: 100;
 }
 
 // header animation
