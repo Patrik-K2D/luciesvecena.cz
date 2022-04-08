@@ -48,9 +48,9 @@ class HomepagePresenter extends BasePresenter
         $form->addTextArea('message', 'Zpráva')
             ->addRule($form::MAX_LENGTH, 'Zpráva je příliš dlouhá', 5000)
             ->setRequired('Obsah zprávy nemůže zůstat prázdný.');
-
-        $form->addInvisibleReCaptcha('recaptcha')
-            ->setMessage('Jste opravdu člověk?');
+//
+//        $form->addInvisibleReCaptcha('recaptcha')
+//            ->setMessage('Jste opravdu člověk?');
 
         $form->addSubmit('submit', 'Odeslat zprávu');
 
@@ -118,9 +118,9 @@ class HomepagePresenter extends BasePresenter
         $form->addEmail('email', 'Email')
             ->addRule(Form::MAX_LENGTH, 'Maximální délka je %s znaků', 150)
             ->setRequired('Musíte zadat Váš email.');
-
-        $form->addInvisibleReCaptcha('recaptcha')
-            ->setMessage('Jste opravdu člověk?');
+//
+//        $form->addInvisibleReCaptcha('recaptcha')
+//            ->setMessage('Jste opravdu člověk?');
 
         $form->addSubmit('submit', 'Odeslat objednávku');
 

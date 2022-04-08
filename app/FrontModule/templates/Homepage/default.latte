@@ -244,17 +244,17 @@
 {/block}
 
 {block #scripts}
-	<script src="https://www.google.com/recaptcha/api.js?render=explicit"></script>
-	<script src="{$basePath}/scripts/invisibleRecaptcha.js"></script>
+{*	<script src="https://www.google.com/recaptcha/api.js?render=explicit"></script>*}
+{*	<script src="{$basePath}/scripts/invisibleRecaptcha.js"></script>*}
 	<script type="application/javascript">
-		function onClick(e) {
-			e.preventDefault();
-			grecaptcha.ready(function() {
-				grecaptcha.execute('reCAPTCHA_site_key', { action: 'submit'}).then(function(token) {
-					// Add your logic to submit to your backend server here.
-				});
-			});
-		}
+		// function onClick(e) {
+		// 	e.preventDefault();
+		// 	grecaptcha.ready(function() {
+		// 		grecaptcha.execute('reCAPTCHA_site_key', { action: 'submit'}).then(function(token) {
+		// 			// Add your logic to submit to your backend server here.
+		// 		});
+		// 	});
+		// }
 
 		var voucherForm = document.querySelector('#frm-voucherForm');
 		var contactForm = document.querySelector('#frm-contactForm');
