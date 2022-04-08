@@ -5,6 +5,7 @@ namespace App\FrontModule\Presenters;
 use Contributte\PdfResponse\PdfResponse;
 use K2D\Gallery\Models\GalleryModel;
 use K2D\News\Models\NewModel;
+use Latte\Engine;
 use Nette\Application\UI\Form;
 use Nette\Mail\Message;
 use Nette\Mail\SendmailMailer;
@@ -68,7 +69,7 @@ class HomepagePresenter extends BasePresenter
 
                 $mail->setFrom($values['email'], $values['name'])
                     ->addTo($ownersEmail)
-                    ->setSubject('LucieSvěcená.cz - zpráva z kontaktního formuláře')
+                    ->setSubject('Zpráva z kontaktního formuláře (luciesvecena.cz)')
                     ->setBody($values['message']);
 
                 $parameters = Neon::decode(file_get_contents(__DIR__ . "/../../config/server/local.neon"));
@@ -144,18 +145,17 @@ class HomepagePresenter extends BasePresenter
                 $pdf = new PdfResponse($template);
                 $pdf->documentTitle = $pdfName;
                 $pdf->pageFormat = "A5-L"; // wide format
-                $pdf->save(__DIR__ . "../../../www/voucher/");
+                $savedFile = $pdf->save(__DIR__ . "/../../../www/vouchery/");
 
-                // send mail
+                // send mail to admin
                 $mail = new Message();
-
                 $vars = $this->configuration->getAllVars();
                 if (isset($vars['email']))
                     $ownersEmail = $vars['email'];
                 else
                     $ownersEmail = 'info@filipurban.cz';
 
-                $mail->setFrom('info@luciesvecena.cz', 'Lucie Svěcená - web')
+                $mail->setFrom('info@luciesvecena.cz', 'Lucie Svěcená')
                     ->addTo($ownersEmail)
                     ->setSubject('LucieSvěcená.cz - objednávka dárkového poukazu')
                     ->setHtmlBody(
@@ -165,7 +165,8 @@ class HomepagePresenter extends BasePresenter
                         Počet lekcí: <b>'. $values['lessons'] .' (cena '. $values['lessons'] * 600 .',- Kč)</b><br>
                         Kód poukazu: <b>'. $variableSymbol .'</b><br>
                         Platnost: <b>'. $validity .'</p>
-                    ');
+                    ')
+                    ->addAttachment($savedFile);
 
                 $parameters = Neon::decode(file_get_contents(__DIR__ . "/../../config/server/local.neon"));
 
@@ -175,8 +176,39 @@ class HomepagePresenter extends BasePresenter
                     'password' => $parameters['mail']['password'],
                     'secure' => $parameters['mail']['secure'],
                 ]);
-
                 $mailer->send($mail);
+
+
+
+                // send mail to customer
+                $latte = new Engine;
+                $params = [
+                    'name' => $values['name'],
+                    'lessons' => $values['lessons'],
+                    'price' => $values['lessons'] * 600,
+                    'variableSymbol' => $variableSymbol,
+                    'validity' => $validity,
+                    'message' => 'Darkovy poukaz (v.s. ' . $variableSymbol . ')',
+                    'pdfName' => $pdfName
+                ];
+
+                $mail2 = new Message();
+
+                $mail2->setFrom('info@luciesvecena.cz', 'Lucie Svěcená')
+                    ->addTo($values['email'])
+                    ->setSubject('Dárkový poukaz na lekce plavání (luciesvecena.cz)')
+                    ->setHtmlBody(
+                    $latte->renderToString(__DIR__ . '/../../Email/voucher.latte', $params),
+                    __DIR__ . '/../../assets/img/email')
+                    ->addAttachment($savedFile);
+
+                $mailer2 = new SmtpMailer([
+                    'host' => $parameters['mail']['host'],
+                    'username' => $parameters['mail']['username'],
+                    'password' => $parameters['mail']['password'],
+                    'secure' => $parameters['mail']['secure'],
+                ]);
+                $mailer2->send($mail2);
 
                 $this->flashMessage('Objednávka proběhla v pořádku! Dárkový poukaz byl zaslán na zadanou adresu.', 'success');
 

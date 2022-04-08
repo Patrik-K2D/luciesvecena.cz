@@ -23,7 +23,7 @@ const navbarUl = document.querySelector("#navbarToggler");
 function runOnScroll() {
 	var currentScrollPos = window.pageYOffset;
 
-	if ((currentScrollPos > 0 && window.innerWidth <= 992) || (currentScrollPos > 220 && window.innerWidth > 992)) {
+	if ((currentScrollPos > 0 && window.innerWidth <= 992) || (currentScrollPos > 110 && window.innerWidth > 992)) {
 		$nav.classList.add("navbar-bg");
 	} else if (currentScrollPos < 190) {
 		$nav.classList.remove("navbar-bg");

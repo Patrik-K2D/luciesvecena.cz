@@ -41,7 +41,7 @@
 
 @include media-breakpoint-up(lg) {
 
-	section {
+	section:not(.new-page, .news-page) {
 		padding: 8rem 0;
 	}
 
@@ -90,7 +90,7 @@
 
 	header {
 		.header-text {
-			bottom: 15%;
+			bottom: 13%;
 
 			span {
 				font-size: 2rem;
@@ -178,11 +178,11 @@
 
 		.voucher-grid {
 			grid-template-columns: 1fr 1fr;
-			grid-gap: 6rem;
+			grid-gap: 4rem;
 
 			.voucher-form {
 				border-radius: 3rem 0 3rem 0;
-				font-size: 1.2rem;
+				font-size: 1.1rem;
 				padding: 3rem;
 				text-align: left;
 			}
@@ -213,7 +213,7 @@
 
 			.contact-form {
 				padding: 3rem;
-				font-size: 1.2rem;
+				font-size: 1.1rem;
 				text-align: left;
 
 				input {

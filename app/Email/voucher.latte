@@ -1,0 +1,130 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Objednávka dárkového poukazu (luciesvecena.cz)</title>
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			color-scheme: light;
+		}
+
+		@media only screen and (max-width: 500px) {
+
+			section {
+				border-radius: 0;
+			}
+
+			header {
+				border-radius: 0;
+			}
+
+			ul {
+				list-style-type: none;
+				padding-left: unset;
+			}
+		}
+
+		body {
+			color: #222222;
+			background-color: #FFFFFF;
+			font-family: 'Roboto', sans-serif;
+			font-size: 16px;
+		}
+
+		section {
+			border-radius: 3rem 0 3rem 0;
+			border: 3px solid #1671B2;
+			background: #f0f4ff;
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-start;
+			align-items: flex-start;
+			word-wrap: normal;
+			max-width: 700px;
+			padding: 1rem;
+			margin-bottom: 4rem;
+		}
+
+		a {
+			color: #4d8cbe;
+		}
+
+		.logo {
+			background: #1671B2;
+			padding: 3rem;
+			border-radius: 3rem 0 3rem 0;
+			display: block;
+		}
+
+		.logo img {
+			max-width: 200px;
+			height: auto;
+			width: 100%;
+		}
+
+		.qr-code {
+			width: 100%;
+			max-width: 250px;
+			height: auto;
+		}
+
+		h1, h3, h4, h5 {
+			color: #1671B2;
+		}
+
+		h4 {
+			margin: 1.5rem 0 0 0;
+			padding: 0;
+		}
+
+		li {
+			margin-bottom: .5rem;
+		}
+
+		article {
+			display: block;
+			width: 100%;
+			padding: 1rem;
+		}
+	</style>
+</head>
+<body>
+	<section>
+		<a class="logo" href="https://www.luciesvecena.cz/" target="_blank">
+			<img src="logo.png" alt="Lucie Svěcená">
+		</a>
+
+		<article>
+			<h1>Děkuji Vám za objednávku dárkového poukazu!</h1>
+			<p>Poukaz ke stažení ve formátu PDF naleznete v příloze a nebo <a href="https://luciesvecena.cz/vouchery/{$pdfName}.pdf" target="_blank">zde na webu</a>.</p>
+
+			<div class="info">
+				<h4>Vyplněné údaje ke kontrole:</h4>
+				<p>
+					Vlastník poukazu: <strong>{$name}</strong><br>
+					Počet lekcí: <strong>{$lessons}</strong>
+				</p>
+			</div>
+
+			<div class="payment">
+				<h4>Informace k platbě:</h4>
+				<p>
+					Částka: <strong>{$price},- Kč</strong><br>
+					Číslo účtu: <strong>2000732761/2010</strong><br>
+					Variabilní symbol: <strong>{$variableSymbol}</strong><br>
+					QR Platba:<br>
+				</p>
+				<img class="qr-code" src="https://api.paylibo.com/paylibo/generator/czech/image?accountNumber=2000732761&bankCode=2010&amount={$price}&currency=CZK&vs={$variableSymbol}&message={$message}&size=440&">
+				<h5>U platby je nutné uvést variabilní symbol!</h5>
+			</div>
+
+			<p class="mt-4">
+				Na viděnou na bazénu!<br>
+				<strong>Lucie Svěcená</strong>
+			</p>
+		</article>
+	</section>
+</body>
+</html>

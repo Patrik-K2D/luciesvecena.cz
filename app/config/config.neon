@@ -13,6 +13,7 @@ application:
 services:
 	router: App\RouterFactory::createRouter()
 	repository: App\Service\ProjectModelRepository
+	- Contributte\PdfResponse\PdfResponseFactory([tempDir: %tempDir%/pdf])
 
 parameters:
 	customTemplatesDir: %appDir%/FrontModule/templates/
