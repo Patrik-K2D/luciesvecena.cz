@@ -3,6 +3,7 @@ import "@theme/front/init.scss";
 import "bootstrap/js/dist/util";
 import "bootstrap/js/dist/dropdown";
 import "bootstrap/js/dist/collapse";
+import "jquery/dist/jquery.min";
 
 import "nette.ajax.js/nette.ajax";
 import naja from "naja";
@@ -66,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	// smooth scroll
 	$(document).ready(function(){
 		// Add smooth scrolling to all links
-		$("a").on("click", function(event) {
+		$(".scroll").on("click", function(event) {
 
 			// Make sure this.hash has a value before overriding default behavior
 			if (this.hash !== "") {
