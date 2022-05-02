@@ -26,13 +26,7 @@ class HomepagePresenter extends BasePresenter
 	public function renderDefault(): void
 	{
         $this->template->news = $this->newModel->getPublicNews('cs')->limit(2);
-        $this->template->gallery = $this->galleryModel->getGallery(1);
 	}
-
-    public function renderTemplate(): void
-    {
-
-    }
 
     public function createComponentContactForm(): Form
     {
@@ -49,9 +43,6 @@ class HomepagePresenter extends BasePresenter
         $form->addTextArea('message', 'Zpráva')
             ->addRule($form::MAX_LENGTH, 'Zpráva je příliš dlouhá', 5000)
             ->setRequired('Obsah zprávy nemůže zůstat prázdný.');
-//
-//        $form->addInvisibleReCaptcha('recaptcha')
-//            ->setMessage('Jste opravdu člověk?');
 
         $form->addSubmit('submit', 'Odeslat zprávu');
 
@@ -177,8 +168,6 @@ class HomepagePresenter extends BasePresenter
                     'secure' => $parameters['mail']['secure'],
                 ]);
                 $mailer->send($mail);
-
-
 
                 // send mail to customer
                 $latte = new Engine;
