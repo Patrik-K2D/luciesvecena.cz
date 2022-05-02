@@ -265,4 +265,12 @@
 			.ohana {max-width: 80%;}
 		}
 	}
+
+	.news-page, .new-page, .error-page {
+		min-height: calc(100vh - 400px) ;
+	}
+
+	.main-footer, .author {
+		height: 200px;
+	}
 }

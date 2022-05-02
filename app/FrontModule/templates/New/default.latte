@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <div class="container">
             <h1 n:block="title">Archiv aktualit</h1>
-            <div n:ifset="$news" class="articles-row mt-5">
+            <div n:if="count($news) > 0" class="articles-row mt-5">
                 {foreach $news as $new}
                     <div class="new">
                         <img n:ifset="$new->cover" src="{$basePath}/upload/news/{$new->id}/{$new->cover}" class="img-thumbnail" alt="{$new->title}">
@@ -25,7 +25,7 @@
                 {/foreach}
             </div>
 
-            <div n:ifset="$news" class="pagination mt-4">
+            <div n:if="count($news) > 0" class="pagination mt-4">
                 {if !$paginator->isFirst()}
                     <a class="mr-3" n:href="default 1">První</a>
                     <a class="mr-3" n:href="default $paginator->page-1">Předchozí</a>
@@ -39,7 +39,7 @@
                 {/if}
             </div>
 
-            <div n:if="$news === NULL" class="alert alert-default">Aktuálně nejsou k dispozici žádné aktuality.</div>
+            <div n:if="count($news) === 0" class="alert alert-default mt-5">Aktuálně nejsou k dispozici žádné aktuality.</div>
         </div>
     </div>
 </section>
