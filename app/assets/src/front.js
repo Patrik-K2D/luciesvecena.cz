@@ -8,6 +8,10 @@ import "jquery/dist/jquery.min";
 import "nette.ajax.js/nette.ajax";
 import naja from "naja";
 
+import "lightbox2/dist/css/lightbox.css";
+// eslint-disable-next-line no-unused-vars
+import lightbox from "lightbox2/dist/js/lightbox";
+
 // import "@/front/cookie";
 
 import Nette from "@/front/netteForms";

@@ -2,21 +2,32 @@
 
 namespace App\FrontModule\Presenters;
 
-use K2D\Gallery\Models\GalleryModel;
+use K2D\Gallery\Models\ImageModel;
 use K2D\News\Models\NewModel;
+use Nette\Utils\Paginator;
 
 class NewPresenter extends BasePresenter
 {
 
     /** @inject */
-    public GalleryModel $galleryModel;
+    public ImageModel $imageModel;
 
     /** @inject */
     public NewModel $newModel;
 
-    public function renderDefault(): void
+    public function renderDefault(int $page = 1): void
     {
-        $this->template->news = $this->newModel->getPublicNews('cs');
+        $newsCount = $this->newModel->getPublicNews('cs')->count();
+
+        $paginator = new Paginator;
+        $paginator->setPage($page); // číslo aktuální stránky
+        $paginator->setItemsPerPage(1); // počet položek na stránce
+        $paginator->setItemCount($newsCount); // celkový počet položek, je-li znám
+
+        $news = $this->newModel->getPublicNews('cs')->limit($paginator->getLength(), $paginator->getOffset());
+
+        $this->template->news = $news;
+        $this->template->paginator = $paginator;
     }
 
     public function renderShow(string $slug): void
@@ -25,7 +36,7 @@ class NewPresenter extends BasePresenter
         $this->template->new = $new;
 
         if (isset($new->gallery_id))
-            $this->template->gallery = $this->galleryModel->getGallery($new->gallery_id);
+            $this->template->images = $this->imageModel->getImagesByGallery($new->gallery_id);
     }
 
 }

@@ -40,13 +40,20 @@
 }
 
 @include media-breakpoint-up(lg) {
-
 	section {
 		padding: 8rem 0;
 	}
 
 	.new-page, .news-page {
 		padding: 4rem 0;
+	}
+
+	.news-page {
+		.new {
+			display: flex;
+			flex-direction: row;
+			gap: 2.5rem;
+		}
 	}
 
 	.navbar {

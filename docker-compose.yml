@@ -27,7 +27,7 @@ services:
       VIRTUAL_HOST: dbluciesvecena.localhost
 
   php:
-    image: php74apache
+    image: php74apache:4.1
     networks:
       - nginx_proxy_network
     expose:

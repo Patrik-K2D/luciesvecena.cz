@@ -5,29 +5,41 @@
     <div class="container-fluid">
         <div class="container">
             <h1 n:block="title">Archiv aktualit</h1>
-            {if count($news) > 0}
-                <div class="articles-row mt-5">
-                    {foreach $news as $new}
-                        <div class="new">
-                            <img n:ifset="$article->cover" src="{$basePath}/upload/news/{$article->id}/{$article->cover}" class="img-fluid" alt="{$article->title}">
-                            <div class="text">
-                                <time datetime="{$new->created|date:"Y-m-d"}">{$new->created|dayMonth}</time>
-                                <a n:href="New:show $new->slug">
+            <div n:ifset="$news" class="articles-row mt-5">
+                {foreach $news as $new}
+                    <div class="new">
+                        <img n:ifset="$new->cover" src="{$basePath}/upload/news/{$new->id}/{$new->cover}" class="img-thumbnail" alt="{$new->title}">
+                        <div class="text">
+                            <time datetime="{$new->created|date:"Y-m-d"}">{$new->created|dayMonth}</time>
+                            <a n:href="New:show $new->slug">
 
-                                    <h3>{$new->title}</h3>
-                                </a>
-                                {if $new->perex}
-                                    {$new->perex|noescape|truncate:300}
-                                {elseif $new->content}
-                                    {$new->content|noescape|truncate:300}
-                                {/if}
-                            </div>
+                                <h3>{$new->title}</h3>
+                            </a>
+                            {if $new->perex}
+                                {$new->perex|noescape|truncate:300}
+                            {elseif $new->content}
+                                {$new->content|noescape|truncate:300}
+                            {/if}
                         </div>
-                    {/foreach}
-                </div>
-            {else}
-                <div class="alert alert-default">Aktuálně nejsou k dispozici žádné aktuality.</div>
-            {/if}
+                    </div>
+                {/foreach}
+            </div>
+
+            <div n:ifset="$news" class="pagination mt-4">
+                {if !$paginator->isFirst()}
+                    <a class="mr-3" n:href="default 1">První</a>
+                    <a class="mr-3" n:href="default $paginator->page-1">Předchozí</a>
+                {/if}
+
+				<span>Stránka {$paginator->page} z {$paginator->pageCount}</span>
+
+				{if !$paginator->isLast()}
+                    <a class="ml-3" n:href="default $paginator->page+1">Další</a>
+                    <a class="ml-3" n:href="default $paginator->pageCount">Poslední</a>
+                {/if}
+            </div>
+
+            <div n:if="$news === NULL" class="alert alert-default">Aktuálně nejsou k dispozici žádné aktuality.</div>
         </div>
     </div>
 </section>
