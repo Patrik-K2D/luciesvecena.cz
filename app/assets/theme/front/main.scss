@@ -403,7 +403,9 @@ header {
 			margin-bottom: 1rem;
 		}
 	}
+}
 
+.news, .news-page {
 	.alert {
 		text-align: center;
 		background: $gray-200;
@@ -412,6 +414,10 @@ header {
 }
 
 .news-page {
+	h1 {
+		font-size: 3rem;
+	}
+
 	.new {
 		margin-bottom: 2.5rem;
 	}
@@ -423,6 +429,10 @@ header {
 }
 
 .new-page {
+
+	h1 {
+		font-size: 3rem;
+	}
 	.detail {
 		.img-fluid {
 			max-width: 600px;
@@ -632,6 +642,10 @@ footer.main-footer {
 			}
 		}
 	}
+}
+
+.error-page {
+	font-size: 1.1rem;
 }
 
 // GDPR

@@ -24,9 +24,10 @@ class NewPresenter extends BasePresenter
         $paginator->setItemsPerPage(1); // počet položek na stránce
         $paginator->setItemCount($newsCount); // celkový počet položek, je-li znám
 
-        $news = $this->newModel->getPublicNews('cs')->limit($paginator->getLength(), $paginator->getOffset());
+        $news = $this->repository->getPublicNews('cs')->limit($paginator->getLength(), $paginator->getOffset());
 
         $this->template->news = $news;
+        bdump($news);
         $this->template->paginator = $paginator;
     }
 
