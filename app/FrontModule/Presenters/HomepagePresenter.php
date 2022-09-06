@@ -2,6 +2,7 @@
 
 namespace App\FrontModule\Presenters;
 
+use App\Model\CampModel;
 use Contributte\PdfResponse\PdfResponse;
 use K2D\Gallery\Models\GalleryModel;
 use K2D\News\Models\NewModel;
@@ -23,8 +24,12 @@ class HomepagePresenter extends BasePresenter
     /** @inject */
     public NewModel $newModel;
 
+    /** @inject */
+    public CampModel $campModel;
+
 	public function renderDefault(): void
 	{
+        $this->template->camps = $this->campModel->getPublicCamps();
         $this->template->news = $this->newModel->getPublicNews('cs')->limit(2);
 	}
 

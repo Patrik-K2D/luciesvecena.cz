@@ -365,6 +365,100 @@ header {
 	}
 }
 
+// KEMPY
+.camps {
+	.camp-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-gap: 1.5rem;
+	}
+
+	.camp {
+		display: flex;
+		flex-direction: column;
+		gap: .7rem;
+		padding: 1rem;
+		border-radius: $border-radius;
+		background-color: rgba($primary, 0.1);
+		position: relative;
+		overflow: hidden;
+		z-index: 1;
+
+		.camp-info {
+			margin-bottom: .4rem;
+			span {
+				font-size: 1.1rem;
+				display: block;
+			}
+		}
+
+		i {
+			position: absolute;
+			font-size: 10rem;
+			right: 2rem;
+			top: 0;
+			z-index: -1;
+			color: rgba($primary, 0.07);
+		}
+	}
+}
+
+.camp-page-grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	align-items: start;
+	gap: 3rem;
+
+	.camp-form {
+		padding: 1.5rem;
+		order: 2;
+		background-color: rgba($primary, 0.05);
+		border-radius: $border-radius;
+
+		h3 {
+			font-size: 1.4rem;
+			font-weight: bold;
+		}
+	}
+
+	.camp-desc {
+		order: 1;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 2rem;
+
+		h2 {
+			font-weight: 500;
+			text-align: left;
+		}
+	}
+
+	.camp-date {
+		time {
+			background: rgba($secondary, .5);
+			padding: .5rem;
+			margin-bottom: 1rem;
+			font-size: 1.1rem;
+		}
+	}
+}
+
+.radio-list {
+	label {
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		flex-direction: row;
+		padding: .6rem;
+		input {
+			width: 22px;
+			height: 22px;
+			margin-right: .3rem;
+		}
+	}
+}
+
 // AKTUALITY
 .news {
 
@@ -533,6 +627,7 @@ article {
 }
 
 // KONTAKT
+.input-hidden {display: none;}
 .contact {
 	.contact-grid {
 		z-index: 1;

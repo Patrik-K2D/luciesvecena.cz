@@ -43,7 +43,8 @@
 		"simple-cms/gallery-module": "dev-master",
 		"simple-cms/news-module": "dev-master",
 		"symfony/dotenv": "^5.1",
-		"tracy/tracy": "^2.7.6"
+		"tracy/tracy": "^2.7.6",
+		"ublaboo/datagrid": "^6.9"
 	},
 	"require-dev": {
 		"orisai/coding-standard": "^2.1.0",

@@ -28,6 +28,36 @@
 		</div>
 	</section>
 
+	<section class="camps" id="kempy">
+		<div class="section-heading">
+{*			<span></span>*}
+			<h2>Plavecké kempy</h2>
+		</div>
+		<div class="container">
+			{if count($camps) > 0}
+				<div class="text text-center mb-5">
+					{box camp}
+				</div>
+				<div class="camp-grid">
+				{foreach $camps as $camp}
+					<div class="camp">
+						<h4>{$camp->name}</h4>
+						<div class="camp-info">
+							<span class="camp-date">Datum: <strong>{$camp->date_from|dayM} - {$camp->date_to|dayM}</strong></span>
+							<span class="camp-capacity">Volná místa: <strong>{$camp->capacity - $camp->participants}</strong> <small>(Max. kapacita: {$camp->capacity})</small></span>
+						</div>
+						<a n:href="Camp:show $camp->id" class="btn btn-success">Zobrazit detail</a>
+						<i class="fa-solid fa-person-swimming"></i>
+					</div>
+				{/foreach}
+				</div>
+			{else}
+				<div class="alert alert-default">Aktuálně nejsou zveřejněné žádné kempy.</div>
+			{/if}
+
+		</div>
+	</section>
+
 	<section class="about" id="o-mne">
 		<div class="container about-flex">
 			<img src="{$basePath}/dist/img/about.jpg" alt="Lucie Svěcená">

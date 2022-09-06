@@ -6,6 +6,7 @@ dateFilterExtension:
 			date: j. n. Y # overwrite default latte filter
 			dateTime: j. F H:i
 			weekDay: l
+			dayM: j. n.
 			dayMonth: j. F
 			dayMonthYear: j. F Y
 			year: Y

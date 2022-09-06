@@ -1,0 +1,42 @@
+{block #description}
+<div class="subpage-header"></div>
+
+<section class="news-page">
+    <div class="container-fluid">
+        <div class="container">
+            <h1 n:block="title">Archiv kempů</h1>
+            <div n:if="count($camps) > 0" class="articles-row mt-5">
+                {foreach $camps as $camp}
+                    <div class="new">
+                        <div class="text">
+                            <time datetime="{$camp->date_from|date:"Y-m-d"}">Od: {$camp->date_from|dayMonth}</time>
+                            <time datetime="{$camp->date_to|date:"Y-m-d"}">Do: {$camp->date_to|dayMonth}</time>
+                            <a n:href="Camp:show $camp->slug">
+                                <h3>{$camp->name}</h3>
+                            </a>
+                            {if $camp->description}
+                                {$camp->description|noescape|truncate:300}
+                            {/if}
+                        </div>
+                    </div>
+                {/foreach}
+            </div>
+
+            <div n:if="count($camps) > 0" class="pagination mt-4">
+                {if !$paginator->isFirst()}
+                    <a class="mr-3" n:href="default 1">První</a>
+                    <a class="mr-3" n:href="default $paginator->page-1">Předchozí</a>
+                {/if}
+
+				<span>Stránka {$paginator->page} z {$paginator->pageCount}</span>
+
+				{if !$paginator->isLast()}
+                    <a class="ml-3" n:href="default $paginator->page+1">Další</a>
+                    <a class="ml-3" n:href="default $paginator->pageCount">Poslední</a>
+                {/if}
+            </div>
+
+            <div n:if="count($camps) === 0" class="alert alert-default mt-5">Aktuálně nejsou k dispozici žádné kempy.</div>
+        </div>
+    </div>
+</section>
