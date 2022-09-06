@@ -23,6 +23,8 @@ class RouterFactory
             ->addRoute('[<lang=cs (cs)>/]template', 'Homepage:template')
             ->addRoute('[<lang=cs (cs)>/]aktuality[-<page>]', 'New:default')
             ->addRoute('[<lang=cs (cs)>/]aktualita/<slug>', 'New:show')
+            ->addRoute('[<lang=cs (cs)>/]kempy[-<page>]', 'Camp:default')
+            ->addRoute('[<lang=cs (cs)>/]kemp-<id>', 'Camp:show')
             ->addRoute('[<lang=cs (cs)>/]<presenter>/<action>', 'Error:404');
 
 		return $router;

@@ -1,0 +1,140 @@
+{block #content}
+<div class="subpage-header"></div>
+
+<section class="page container">
+    {if $camp !== NULL}
+    <div class="camp-page-grid">
+        <div class="camp-form">
+            <h3 class="mb-4">Přihláška na kemp</h3>
+
+            {snippet signUpFlashes}
+                {foreach $flashes as $flash}
+                    <div class="alert alert-{$flash->type} alert-dismissible fade show" style="max-width: 500px" role="alert">
+                        {$flash->message}
+                    </div>
+                {/foreach}
+            {/snippet}
+
+            {if ($camp->capacity > $camp->participants)}
+                {snippet signUpForm}
+                {form signUpForm, class => 'row'}
+                    {input camp_id class => 'form-control input-hidden', value => $camp->id}
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            {label name}{/label}
+                            {input name class => 'form-control'}
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            {label surname}{/label}
+                            {input surname class => 'form-control'}
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            {label year_of_birth}{/label}
+                            {input year_of_birth class => 'form-control'}
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            Pohlaví
+                            <div class="d-flex flex-row radio-list">
+                                {input sex class => 'form-control'}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            {label team}{/label}
+                            {input team class => 'form-control'}
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            {label email}{/label}
+                            {input email class => 'form-control'}
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            {label note}{/label}
+                            {input note class => 'form-control'}
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="form-group d-inline-flex align-items-center">
+                            <div class="spinner-border spinner mr-3" style="display: none;" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                            {input submit class => 'btn btn-success btn-lg submit-signUpForm'}
+                        </div>
+                    </div>
+                {/form}
+            {/snippet}
+            {else}
+                <div class="alert alert-warning alert-dismissible fade show" style="max-width: 500px" role="alert">
+                    Na tento termín už nezbyla žádná volná místa.
+                </div>
+            {/if}
+        </div>
+        <div class="camp-desc">
+                <h2 n:block="title" class="mb-2">{$camp->name}</h2>
+
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Datum konání:</th>
+                                <th scope="col">Kapacita:</th>
+                                <th scope="col">Volná místa:</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><time datetime="{$camp->date_from|date:"Y-m-d"}">{$camp->date_from|dayM} - {$camp->date_to|dayM}</time></td>
+                                <td>{$camp->capacity}</td>
+                                <td>{$camp->capacity - $camp->participants}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="camp-content">
+                    <h4 class="pb-2">Základní informace:</h4>
+                    {$camp->description|noescape}
+                </div>
+
+                <a n:href="Homepage:default#kempy" class="btn btn-primary mt-4">Zpět na úvod</a>
+        </div>
+    </div>
+    {else}
+        <h2>Hledaný kemp se nepodařilo nalézt.</h2>
+        <a n:href="Homepage:default#kempy" class="btn btn-primary mt-4">Zpět na úvod</a>
+    {/if}
+</section>
+
+
+{block #scripts}
+    <script type="application/javascript">
+        var signUpForm = document.querySelector('#frm-signUpForm');
+        var submitBtn = signUpForm.querySelector('.submit-signUpForm');
+        var spinner = signUpForm.querySelector('.spinner');
+
+        signUpForm.addEventListener('submit', () => {
+            submitBtn.disabled = true;
+            spinner.style.display = 'block';
+            setTimeout(() => {
+                submitBtn.disabled = false;
+                spinner.style.display = 'none';
+            }, 3000);
+        });
+    </script>
+{/block}

@@ -32,6 +32,12 @@
 }
 
 @include media-breakpoint-up(md) {
+	.camps {
+		.camp-grid {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+
 	.news {
 		.articles-row {
 			grid-template-columns: 1fr 1fr;
@@ -40,6 +46,21 @@
 }
 
 @include media-breakpoint-up(lg) {
+
+	.camp-page-grid {
+		grid-template-columns: 1fr 500px;
+	}
+
+	.camps {
+		.camp-grid {
+			grid-template-columns: 1fr 1fr 1fr;
+		}
+
+		.camp {
+			padding: 1.5rem;
+		}
+	}
+
 	section {
 		padding: 8rem 0;
 	}

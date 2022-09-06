@@ -1,0 +1,60 @@
+{extends $control->baseGridTemplate}
+
+
+{define body-cell-name}
+	<td>
+		{$record->name}
+	</td>
+{/define}
+
+{define body-cell-date_from}
+	<td>
+		{$record->date_from}
+	</td>
+{/define}
+
+{define body-cell-date_to}
+	<td>
+		{$record->date_to}
+	</td>
+{/define}
+
+{define body-cell-participant}
+	<td>
+		{$record->participants} / {$record->capacity}
+	</td>
+{/define}
+
+{define body-cell-created}
+	<td class="text-right">
+		{$record->created|date:'d.m.Y'}
+	</td>
+{/define}
+
+{define body-cell-public}
+	<td class="text-center">
+		{if $record->public}
+			<span class="text-success"><i class="mdi mdi-earth"></i> Veřejný</span>
+		{else}
+			<span class="text-danger"><i class="mdi mdi-lock"></i> Neveřejný</span>
+		{/if}
+	</td>
+{/define}
+
+{define row-action-show}
+	<a href="{plink :Admin:Camp:show $record->id}" class="btn btn-sm btn-secondary">
+		{$action->getLabel()}
+	</a>
+{/define}
+
+{define row-action-edit}
+	<a href="{plink :Admin:Camp:edit $record->id}" class="btn btn-sm btn-primary">
+		{$action->getLabel()}
+	</a>
+{/define}
+
+{define row-action-delete}
+	<a data-ajax="on" href="{$link}" class="btn btn-sm btn-outline-danger tw-ajax" data-confirm="modal" n:attr="data-confirm-text => $action->getConfirmation()">
+		{$action->getLabel()}
+	</a>
+{/define}
