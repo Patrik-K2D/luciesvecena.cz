@@ -14,6 +14,4 @@ import "ublaboo-datagrid/assets/datagrid-instant-url-refresh";
 import "bootstrap-select/dist/js/bootstrap-select.min";
 // jquery
 import "jquery/dist/jquery.min";
-
-
 import "nette.ajax.js/nette.ajax";

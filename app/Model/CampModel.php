@@ -18,6 +18,6 @@ class CampModel extends BaseModel
 
     public function getPublicCamps(): Selection
     {
-        return $this->getTable()->where('public', 1);
+        return $this->getTable()->where('public', 1)->order('date_from', 'ASC');
     }
 }
