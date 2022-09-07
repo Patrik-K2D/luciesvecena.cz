@@ -89,12 +89,15 @@ class CampPresenter extends BasePresenter
                         'participants' => $camp->participants + 1
                     ]);
 
+                    $date_from = date_format($camp->date_from,"d. m.");
+                    $date_to = date_format($camp->date_to,"d. m.");
+
                     // send mail
                     $latte = new Engine;
                     $params = [
                         'camp_name' => $camp->name,
-                        'date_from' => $camp->date_from,
-                        'date_to' => $camp->date_to,
+                        'date_from' => $date_from,
+                        'date_to' => $date_to,
                         'name' => $values['name'],
                         'surname' => $values['surname'],
                         'sex' => $values['sex'],
@@ -105,7 +108,7 @@ class CampPresenter extends BasePresenter
 
                     $mail = new Message();
 
-                    $mail->setFrom('info@filipurban.cz', 'Lucie Svěcená');
+                    $mail->setFrom('info@luciesvecena.cz', 'Lucie Svěcená');
                     $mail->addTo($values['email']);
                     $mail->setHtmlBody(
                         $latte->renderToString(__DIR__ . '/../../Email/camp.latte', $params),
@@ -126,11 +129,11 @@ class CampPresenter extends BasePresenter
                 }
 
                 if ($this->isAjax()) {
-                    $this->redrawControl('voucherFlashes');
-                    $this->redrawControl('voucherForm');
+                    $this->redrawControl('signUpFlashes');
+                    $this->redrawControl('signUpForm');
                     $form->setValues([], TRUE);
                 } else {
-                    $this->redirect('this#darkovy-poukaz');
+                    $this->redirect('this');
                 }
 
             } catch (SmtpException $e) {
