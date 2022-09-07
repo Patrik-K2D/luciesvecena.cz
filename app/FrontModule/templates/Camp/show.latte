@@ -89,7 +89,7 @@
                 <h2 n:block="title" class="mb-2">{$camp->name}</h2>
 
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th scope="col">Datum konání:</th>
@@ -99,7 +99,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><time datetime="{$camp->date_from|date:"Y-m-d"}">{$camp->date_from|dayM} - {$camp->date_to|dayM}</time></td>
+                                <td><time datetime="{$camp->date_from|date:"Y-m-d"}">{$camp->date_from|dayM}{if $camp->date_from != $camp->date_to} - {$camp->date_to|dayM}{/if}</time></td>
                                 <td>{$camp->capacity}</td>
                                 <td>{$camp->capacity - $camp->participants}</td>
                             </tr>
@@ -112,12 +112,12 @@
                     {$camp->description|noescape}
                 </div>
 
-                <a n:href="Homepage:default#kempy" class="btn btn-primary mt-4">Zpět na úvod</a>
+                <a n:href="Homepage:default#kempy" class="btn btn-light mt-4">Zpět na úvod</a>
         </div>
     </div>
     {else}
         <h2>Hledaný kemp se nepodařilo nalézt.</h2>
-        <a n:href="Homepage:default#kempy" class="btn btn-primary mt-4">Zpět na úvod</a>
+        <a n:href="Homepage:default#kempy" class="btn btn-light mt-4">Zpět na úvod</a>
     {/if}
 </section>
 

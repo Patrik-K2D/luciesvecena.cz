@@ -376,13 +376,29 @@ header {
 	.camp {
 		display: flex;
 		flex-direction: column;
+		align-items: flex-start;
 		gap: .7rem;
 		padding: 1rem;
 		border-radius: $border-radius;
 		background-color: rgba($primary, 0.1);
 		position: relative;
-		overflow: hidden;
 		z-index: 1;
+
+		.btn-sm {
+			padding: .3rem .6rem;
+			font-size: 0.8rem;
+			margin-bottom: 1rem;
+			border: unset;
+			cursor: auto;
+
+			&:hover {
+				background-color: $green;
+			}
+		}
+
+		.btn-primary {
+			width: 100%;
+		}
 
 		.camp-info {
 			margin-bottom: .4rem;

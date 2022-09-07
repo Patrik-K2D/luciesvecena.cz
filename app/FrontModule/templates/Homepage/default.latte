@@ -1,16 +1,16 @@
 {block #content}
 	<header id="uvod">
-        <div class="header-text container-fluid">
-{*			Ukáži Vám, jak si zamilovat*}
-            <span>Objevte krásy</span>
-            <h1 class="loading wave">Plavání</h1>
-        </div>
-        <a href="#lekce" class="scroll-down scroll">
-          Nabídka lekcí
-          <svg id="svg-arrow-down" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 22 35" style="enable-background:new 0 0 22 35;" xml:space="preserve">
+		<div class="header-text container-fluid">
+			{*			Ukáži Vám, jak si zamilovat*}
+			<span>Objevte krásy</span>
+			<h1 class="loading wave">Plavání</h1>
+		</div>
+		<a href="#lekce" class="scroll-down scroll">
+			Nabídka lekcí
+			<svg id="svg-arrow-down" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 22 35" style="enable-background:new 0 0 22 35;" xml:space="preserve">
             <polygon class="arrow" points="20.58,11.584 12.004,20.158 12.004,0 9.996,0 9.996,20.158 1.42,11.584 0,13.004 11,24 22,13.004 "></polygon>
           </svg>
-        </a>
+		</a>
 	</header>
 
 	<section class="lectures" id="lekce">
@@ -30,7 +30,7 @@
 
 	<section class="camps" id="kempy">
 		<div class="section-heading">
-{*			<span></span>*}
+			{*			<span></span>*}
 			<h2>Plavecké kempy</h2>
 		</div>
 		<div class="container">
@@ -39,20 +39,21 @@
 					{box camp}
 				</div>
 				<div class="camp-grid">
-				{foreach $camps as $camp}
-					<div class="camp">
-						<h4>{$camp->name}</h4>
-						<div class="camp-info">
-							<span class="camp-date">Datum: <strong>{$camp->date_from|dayM} - {$camp->date_to|dayM}</strong></span>
-							<span class="camp-capacity">Volná místa: <strong>{$camp->capacity - $camp->participants}</strong> <small>(Max. kapacita: {$camp->capacity})</small></span>
+					{foreach $camps as $camp}
+						<div class="camp">
+							<span n:if="$camp->capacity > $camp->participants" class="btn btn-success btn-sm">Přihlášky otevřeny!</span>
+							<h4>{$camp->name}</h4>
+							<div class="camp-info">
+								<span class="camp-date">Datum konání: <strong>{$camp->date_from|dayM}{if $camp->date_from != $camp->date_to} - {$camp->date_to|dayM}{/if}</strong></span>
+								<span class="camp-capacity">Volná místa: <strong>{$camp->capacity - $camp->participants}</strong> <small>(Max. kapacita: {$camp->capacity})</small></span>
+							</div>
+							<a n:href="Camp:show $camp->id" class="btn btn-primary">Zobrazit detail</a>
+							<i class="fa-solid fa-person-swimming"></i>
 						</div>
-						<a n:href="Camp:show $camp->id" class="btn btn-success">Zobrazit detail</a>
-						<i class="fa-solid fa-person-swimming"></i>
-					</div>
-				{/foreach}
+					{/foreach}
 				</div>
 			{else}
-				<div class="alert alert-default">Aktuálně nejsou zveřejněné žádné kempy.</div>
+				<div class="alert alert-default" style="text-align: center; background: #e9ecef; padding: 1.5rem;">Aktuálně nejsou zveřejněné žádné kempy.</div>
 			{/if}
 
 		</div>
@@ -98,22 +99,22 @@
 				</div>
 				{if count($news) > 0}
 					<div class="articles-row">
-					{foreach $news as $new}
-						<div class="new article">
-							<img n:ifset="$new->cover" src="{$basePath}/upload/news/{$new->id}/{$new->cover}" class="img-fluid" alt="{$new->title}">
-							<div class="text">
-								<time datetime="{$new->created|date:"Y-m-d"}">{$new->created|dayMonth}</time>
-								<a n:href="New:show $new->slug">
-									<h3>{$new->title}</h3>
-								</a>
-								{if $new->perex}
-								   {$new->perex|noescape|truncate:300}
-								{elseif $new->content}
-								   {$new->content|noescape|truncate:300}
-								{/if}
+						{foreach $news as $new}
+							<div class="new article">
+								<img n:ifset="$new->cover" src="{$basePath}/upload/news/{$new->id}/{$new->cover}" class="img-fluid" alt="{$new->title}">
+								<div class="text">
+									<time datetime="{$new->created|date:"Y-m-d"}">{$new->created|dayMonth}</time>
+									<a n:href="New:show $new->slug">
+										<h3>{$new->title}</h3>
+									</a>
+									{if $new->perex}
+										{$new->perex|noescape|truncate:300}
+									{elseif $new->content}
+										{$new->content|noescape|truncate:300}
+									{/if}
+								</div>
 							</div>
-						</div>
-					{/foreach}
+						{/foreach}
 					</div>
 					<div class="container text-center">
 						<a n:href="New:default" class="btn btn-primary mt-5">Archiv aktualit</a>
