@@ -45,8 +45,11 @@ class CampPresenter extends BasePresenter
         if ($id !== null && $this->camp !== null) {
             $camp = $this->camp->toArray();
 
-            $date = $camp['created'];
-            $camp['created'] = $date->format('j.n.Y');
+            $date = $camp['date_from'];
+            $camp['date_from'] = $date->format('j.n.Y');
+
+            $date = $camp['date_to'];
+            $camp['date_to'] = $date->format('j.n.Y');
 
             $form = $this['editForm'];
             $form->setDefaults($camp);

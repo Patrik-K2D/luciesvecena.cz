@@ -98,7 +98,8 @@
 
     <article>
         <h1>Ahoj!</h1>
-        <p>Tvoje přihláška na plavecký kemp už ke mě úspěšně dorazila. Těším se, že společně zapracujeme na zlepšení tvého plavání a zároveň si to pořádně užijeme!</p>
+        <p>Tvoje přihláška na plavecký kemp ke mě úspěšně dorazila.<br>
+            Těším se, že společně zapracujeme na zlepšení tvých plaveckých dovedností a zároveň si to pořádně užijeme!</p>
 
         <div class="info">
             <h4>Vyplněné údaje ke kontrole:</h4>
@@ -107,20 +108,20 @@
                 Rok narození: <strong>{$year_of_birth}</strong><br>
                 Pohlaví: <strong>{if $sex === 'M'}Muž{else}Žena{/if}</strong><br>
                 {if !empty($team)}Oddíl: <strong>{$team}</strong><br>{/if}
-                {if !empty($note)}Poznámka:<br><p>{$note}</p>{/if}
+                {if !empty($note)}Poznámka:<p>{$note}</p>{/if}
             </p>
         </div>
 
         <div class="info">
             <h4>Informace o kempu:</h4>
             <p>
-                Datum konání: <strong>{$date_from} - {$date_to}</strong><br>
+                Datum konání: <strong>{$date_from}{if $date_from != $date_to} - {$date_to}{/if}</strong><br>
             </p>
         </div>
 
         <p class="mt-4">
             Na viděnou na bazénu!<br>
-            <strong>Lucie Svěcená</strong>
+            <strong>Lucka</strong>
         </p>
     </article>
 </section>

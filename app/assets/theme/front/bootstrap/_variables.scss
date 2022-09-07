@@ -73,7 +73,7 @@ $success:       $green !default;
 $info:          darken($secondary, 30%) !default;
 $warning:       $yellow !default;
 $danger:        $red !default;
-$light:         $gray-100 !default;
+$light:         $gray-200 !default;
 $dark:          $gray-800 !default;
 
 $theme-colors: () !default;
@@ -449,7 +449,7 @@ $btn-block-spacing-y:         .5rem !default;
 // Allows for customizing button radius independently from global border radius
 $btn-border-radius:           $border-radius*10 !default;
 $btn-border-radius-lg:        $border-radius-lg*10 !default;
-$btn-border-radius-sm:        $border-radius-sm !default;
+$btn-border-radius-sm:        $border-radius-sm*4 !default;
 
 $btn-transition:              color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out !default;
 
