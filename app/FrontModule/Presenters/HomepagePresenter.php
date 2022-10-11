@@ -158,6 +158,7 @@ class HomepagePresenter extends BasePresenter
                         '<h3>Právě byl zakoupen dárkový poukaz!</h3>
                         <p><small>Informace o objednávce:</small><br><br>
                         Jméno: <b>'. $values['name'] . '</b><br>
+                        Email: <b>'. $values['email'] .'</b><br>
                         Počet lekcí: <b>'. $values['lessons'] .' (cena '. $values['lessons'] * 600 .',- Kč)</b><br>
                         Kód poukazu: <b>'. $variableSymbol .'</b><br>
                         Platnost: <b>'. $validity .'</p>
